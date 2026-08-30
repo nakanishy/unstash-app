@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Centering } from "../components/Centering";
-import { motion, useReducedMotion } from "motion/react";
+import { WaveText } from "../components/WaveText";
+import { RainbowText } from "../components/RainbowText";
 
 export function Details() {
   return (
@@ -38,8 +39,8 @@ export function Details() {
             <ProblemFeature
               renderTitle={() => (
                 <span>
-                  Text-based search, <span className="mr-3">but</span>
-                  <RainbowText />
+                  Text-based search, <span>but </span>
+                  <RainbowText>SMART</RainbowText>
                 </span>
               )}
               description={
@@ -62,8 +63,8 @@ export function Details() {
             <ProblemFeature
               renderTitle={() => (
                 <span>
-                  <span className="font-[Rubik_Glitch] italic">SPEED</span> by
-                  design
+                  <span className="mr-3 font-[Rubik_Glitch] italic">SPEED</span>{" "}
+                  <span>by design</span>
                 </span>
               )}
               description={
@@ -90,7 +91,7 @@ function ProblemFeature({
 }) {
   return (
     <div className="">
-      <h2 className="text-5 text-fg1 font-bold">{renderTitle()}</h2>
+      <h2 className="text-7 text-fg1 font-bold">{renderTitle()}</h2>
       <p className="mt-3 max-w-[500px] text-2 leading-[1.45] text-fg2">
         {description}
       </p>
@@ -118,129 +119,5 @@ function SampleResults() {
         </div>
       ))}
     </div>
-  );
-}
-
-const text = "SMART";
-
-const colors = [
-  "#ff0000",
-  "#ff7a00",
-  "#ffee00",
-  "#00d084",
-  "#00aaff",
-  "#7a5cff",
-  "#ff2bd6",
-  "#ff0000",
-];
-
-function RainbowText() {
-  return (
-    <span aria-label={text} className="font-black tracking-widest">
-      {text.split("").map((char, index) => (
-        <motion.span
-          key={`${char}-${index}`}
-          className="inline-block"
-          animate={{
-            color: colors,
-            y: [0, -4, 0, 7, 0],
-            scale: [1, 1.08, 1, 0.96, 1],
-            textShadow: [
-              "0 0 0px currentColor",
-              "0 0 18px currentColor",
-              "0 0 0px currentColor",
-            ],
-          }}
-          transition={{
-            color: {
-              duration: 4,
-              repeat: Infinity,
-              ease: "linear",
-              delay: index * 0.12,
-            },
-            y: {
-              duration: 1.8,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: index * 0.12,
-            },
-            scale: {
-              duration: 1.8,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: index * 0.12,
-            },
-            textShadow: {
-              duration: 1.8,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: index * 0.12,
-            },
-          }}
-        >
-          {char}
-        </motion.span>
-      ))}
-    </span>
-  );
-}
-
-type WaveTextProps = {
-  text: string;
-  className?: string;
-  duration?: number;
-  delay?: number;
-  amplitude?: number;
-};
-
-export function WaveText({
-  text,
-  className = "",
-  duration = 0.9,
-  delay = 0.06,
-  amplitude = 8,
-}: WaveTextProps) {
-  const shouldReduceMotion = useReducedMotion();
-
-  const characters = Array.from(text);
-
-  return (
-    <span
-      className={`inline-flex flex-wrap ${className}`}
-      aria-label={text}
-      role="text"
-    >
-      {characters.map((character, index) => {
-        // 通常の半角スペースはHTML上で潰れるため、改行しない空白に変換
-        const displayCharacter = character === " " ? "\u00A0" : character;
-
-        return (
-          <motion.span
-            key={`${character}-${index}`}
-            aria-hidden="true"
-            className="inline-block"
-            animate={
-              shouldReduceMotion
-                ? { y: 0 }
-                : {
-                    y: [0, -amplitude, 0],
-                  }
-            }
-            transition={
-              shouldReduceMotion
-                ? undefined
-                : {
-                    duration,
-                    delay: index * delay,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }
-            }
-          >
-            {displayCharacter}
-          </motion.span>
-        );
-      })}
-    </span>
   );
 }
