@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --spacing-1: 2px;
+  --spacing-2: 4px;
+  --spacing-3: 8px;
+  --spacing-4: 12px;
+  --spacing-5: 16px;
+  --spacing-6: 21px;
+  --spacing-7: 25px;
+  --spacing-8: 32px;
+  --spacing-9: 48px;
+  --spacing-10: 64px;
+
+  --text-1: 12px;
+  --text-2: 14px;
+  --text-3: 16px;
+  --text-4: 18px;
+  --text-5: 21px;
+  --text-6: 25px;
+  --text-7: 32px;
+  --text-8: 42px;
+  --text-9: 64px;
+  --text-10: 128px;
+
+  --color-white: #ffffff;
+  --color-white-very-subtle: #ffffff09;
+  --color-white-subtle: #ffffff11;
+  --color-white-surface: #ffffff1f;
+  --color-white-medium: #ffffff3a;
+  --color-white-strong: #ffffff66;
+  --color-white-very-strong: #ffffff99;
+  --color-border: #ffffff44;
+
+  --color-fg1: #ffffffd0;
+  --color-fg2: #ffffff7f;
+  --color-fg3: #ffffff4c;
+}
+
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: "TASA Orbiter", sans-serif;
+}
