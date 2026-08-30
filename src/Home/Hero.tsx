@@ -1,17 +1,14 @@
 import clsx from "clsx";
-import { LP_WIDTH } from "../variables";
+import { Centering } from "../components/Centering";
 
 export function Hero() {
   return (
-    <section
-      className={clsx("flex items-center", "mx-auto h-[600px]")}
-      style={{
-        maxWidth: LP_WIDTH,
-      }}
-    >
-      <Left />
-      <Right />
-    </section>
+    <Centering>
+      <section className={clsx("flex items-center", "h-[600px]")}>
+        <Left />
+        <Right />
+      </section>
+    </Centering>
   );
 }
 
