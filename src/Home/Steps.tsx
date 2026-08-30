@@ -1,12 +1,13 @@
 import clsx from "clsx";
 import { Centering } from "../components/Centering";
+import type { PropsWithClassName } from "../types";
 
-export function Steps() {
+export function Steps(props: PropsWithClassName) {
   const h = clsx("text-6 text-fg1 font-bold");
   const p = clsx("text-3 text-fg2");
   const c = clsx("mt-4");
   return (
-    <Centering>
+    <Centering className={props.className}>
       <section className="flex gap-8 px-8">
         <div>
           <Placeholder />

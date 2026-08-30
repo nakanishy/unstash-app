@@ -2,10 +2,11 @@ import type { ReactNode } from "react";
 import { Centering } from "../components/Centering";
 import { WaveText } from "../components/WaveText";
 import { RainbowText } from "../components/RainbowText";
+import type { PropsWithClassName } from "../types";
 
-export function Details() {
+export function Details(props: PropsWithClassName) {
   return (
-    <Centering>
+    <Centering className={props.className}>
       <section className="mt-32 px-8">
         <div className="flex gap-8 items-start">
           <h1 className="text-8 leading-[1.2] text-fg1 font-bold">
@@ -92,7 +93,7 @@ function ProblemFeature({
   return (
     <div className="">
       <h2 className="text-7 text-fg1 font-bold">{renderTitle()}</h2>
-      <p className="mt-3 max-w-[500px] text-2 leading-[1.45] text-fg2">
+      <p className="mt-3 max-w-[500px] text-4 leading-[1.45] text-fg2">
         {description}
       </p>
     </div>

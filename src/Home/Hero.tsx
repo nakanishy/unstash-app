@@ -1,9 +1,10 @@
 import clsx from "clsx";
 import { Centering } from "../components/Centering";
+import type { PropsWithClassName } from "../types";
 
-export function Hero() {
+export function Hero(props: PropsWithClassName) {
   return (
-    <Centering>
+    <Centering className={props.className}>
       <section className={clsx("flex items-center px-8", "h-[600px]")}>
         <Left />
         <Right />
