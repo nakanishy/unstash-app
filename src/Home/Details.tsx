@@ -1,16 +1,17 @@
 import type { ReactNode } from "react";
 import { Centering } from "../components/Centering";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 export function Details() {
   return (
     <Centering>
       <section className="mt-32 px-8">
         <div className="flex gap-8 items-start">
-          <h1 className="text-8 leading-[1.15] text-fg1 font-bold">
+          <h1 className="text-8 leading-[1.2] text-fg1 font-bold">
             You have hundreds of thousands of samples.
             <br />
-            So why do you keep using the same ones?
+            So why do you keep using{" "}
+            <WaveText text="the same ones?" duration={1.4} />
           </h1>
         </div>
         <div className="mt-14 flex flex-col gap-9">
@@ -59,7 +60,12 @@ export function Details() {
           </div>
           <div className="grid grid-cols-[1fr_1fr] gap-12">
             <ProblemFeature
-              renderTitle={() => "Speed by design"}
+              renderTitle={() => (
+                <span>
+                  <span className="font-[Rubik_Glitch] italic">SPEED</span> by
+                  design
+                </span>
+              )}
               description={
                 <>
                   It worked very smoothly even with a large sample library like
@@ -175,6 +181,66 @@ function RainbowText() {
           {char}
         </motion.span>
       ))}
+    </span>
+  );
+}
+
+type WaveTextProps = {
+  text: string;
+  className?: string;
+  duration?: number;
+  delay?: number;
+  amplitude?: number;
+};
+
+export function WaveText({
+  text,
+  className = "",
+  duration = 0.9,
+  delay = 0.06,
+  amplitude = 8,
+}: WaveTextProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  const characters = Array.from(text);
+
+  return (
+    <span
+      className={`inline-flex flex-wrap ${className}`}
+      aria-label={text}
+      role="text"
+    >
+      {characters.map((character, index) => {
+        // 通常の半角スペースはHTML上で潰れるため、改行しない空白に変換
+        const displayCharacter = character === " " ? "\u00A0" : character;
+
+        return (
+          <motion.span
+            key={`${character}-${index}`}
+            aria-hidden="true"
+            className="inline-block"
+            animate={
+              shouldReduceMotion
+                ? { y: 0 }
+                : {
+                    y: [0, -amplitude, 0],
+                  }
+            }
+            transition={
+              shouldReduceMotion
+                ? undefined
+                : {
+                    duration,
+                    delay: index * delay,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }
+            }
+          >
+            {displayCharacter}
+          </motion.span>
+        );
+      })}
     </span>
   );
 }
