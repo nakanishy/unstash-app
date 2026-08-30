@@ -7,7 +7,7 @@ export function Steps() {
   const c = clsx("mt-4");
   return (
     <Centering>
-      <section className="grid grid-cols-1 gap-8 px-8">
+      <section className="flex gap-8 px-8">
         <div>
           <Placeholder />
           <div className={c}>

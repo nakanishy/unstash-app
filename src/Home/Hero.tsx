@@ -4,7 +4,7 @@ import { Centering } from "../components/Centering";
 export function Hero() {
   return (
     <Centering>
-      <section className={clsx("flex items-center", "h-[600px]")}>
+      <section className={clsx("flex items-center px-8", "h-[600px]")}>
         <Left />
         <Right />
       </section>
