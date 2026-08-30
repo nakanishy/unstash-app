@@ -30,7 +30,7 @@ function Left() {
           Download for macOS
         </div>
       </div>
-      <div className="mt-4 text-2 text-fg3">
+      <div className="mt-4 text-2 text-fg2">
         One-time purchase · No subscription · 30 days free trial.
       </div>
     </div>
