@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Centering } from "../components/Centering";
+import { motion } from "motion/react";
 
 export function Details() {
   return (
@@ -15,7 +16,12 @@ export function Details() {
         <div className="mt-14 flex flex-col gap-9">
           <div className="grid grid-cols-[1fr_1fr] gap-12">
             <ProblemFeature
-              title="A fresh result every time"
+              renderTitle={() => (
+                <span>
+                  🍋 A <span className="font-[Lemon]">fresh</span> result every
+                  time
+                </span>
+              )}
               description={
                 <>
                   Stop opening the same samples.
@@ -29,7 +35,12 @@ export function Details() {
           </div>
           <div className="grid grid-cols-[1fr_1fr] gap-12">
             <ProblemFeature
-              title="Text-based search, but SMART"
+              renderTitle={() => (
+                <span>
+                  Text-based search, <span className="mr-3">but</span>
+                  <RainbowText />
+                </span>
+              )}
               description={
                 <>
                   Filtering by key like key:C#min, tempo like 120-130, not
@@ -48,7 +59,7 @@ export function Details() {
           </div>
           <div className="grid grid-cols-[1fr_1fr] gap-12">
             <ProblemFeature
-              title="Speed by design"
+              renderTitle={() => "Speed by design"}
               description={
                 <>
                   It worked very smoothly even with a large sample library like
@@ -65,16 +76,16 @@ export function Details() {
 }
 
 function ProblemFeature({
-  title,
+  renderTitle,
   description,
 }: {
-  title: string;
+  renderTitle: () => ReactNode;
   description: ReactNode;
 }) {
   return (
     <div className="">
-      <h2 className="text-5 text-fg1 font-bold md:text-6">{title}</h2>
-      <p className="mt-3 max-w-[500px] text-2 leading-[1.45] text-fg2 md:text-3">
+      <h2 className="text-5 text-fg1 font-bold">{renderTitle()}</h2>
+      <p className="mt-3 max-w-[500px] text-2 leading-[1.45] text-fg2">
         {description}
       </p>
     </div>
@@ -101,5 +112,69 @@ function SampleResults() {
         </div>
       ))}
     </div>
+  );
+}
+
+const text = "SMART";
+
+const colors = [
+  "#ff0000",
+  "#ff7a00",
+  "#ffee00",
+  "#00d084",
+  "#00aaff",
+  "#7a5cff",
+  "#ff2bd6",
+  "#ff0000",
+];
+
+function RainbowText() {
+  return (
+    <span aria-label={text} className="font-black tracking-widest">
+      {text.split("").map((char, index) => (
+        <motion.span
+          key={`${char}-${index}`}
+          className="inline-block"
+          animate={{
+            color: colors,
+            y: [0, -4, 0, 7, 0],
+            scale: [1, 1.08, 1, 0.96, 1],
+            textShadow: [
+              "0 0 0px currentColor",
+              "0 0 18px currentColor",
+              "0 0 0px currentColor",
+            ],
+          }}
+          transition={{
+            color: {
+              duration: 4,
+              repeat: Infinity,
+              ease: "linear",
+              delay: index * 0.12,
+            },
+            y: {
+              duration: 1.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: index * 0.12,
+            },
+            scale: {
+              duration: 1.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: index * 0.12,
+            },
+            textShadow: {
+              duration: 1.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: index * 0.12,
+            },
+          }}
+        >
+          {char}
+        </motion.span>
+      ))}
+    </span>
   );
 }
