@@ -15,7 +15,7 @@ import { ShimmerText } from "../components/ShimmerText";
 export function GetEarlyAccess(props: PropsWithClassName) {
   return (
     <section className={clsx("py-8 bg-white", props.className)}>
-      <Centering>
+      <Centering width={700}>
         <h1
           className="inline-block text-8 leading-[1.2] text-fg1 font-bold italic uppercase bg-black"
           style={{

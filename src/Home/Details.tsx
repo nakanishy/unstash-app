@@ -3,6 +3,7 @@ import { Centering } from "../components/Centering";
 import { WaveText } from "../components/WaveText";
 import { RainbowText } from "../components/RainbowText";
 import type { PropsWithClassName } from "../types";
+import { GradientText } from "../components/GradientText";
 
 export function Details(props: PropsWithClassName) {
   return (
@@ -21,8 +22,13 @@ export function Details(props: PropsWithClassName) {
             <ProblemFeature
               renderTitle={() => (
                 <span>
-                  🍋 A <span className="font-[Lemon]">fresh</span> result every
-                  time
+                  🍋 A{" "}
+                  <span className="font-[Lemon]">
+                    <GradientText gradient="linear-gradient(90deg, #fff7a8 0%, #fde047 45%, #facc15 75%, #bef264 100%)">
+                      fresh
+                    </GradientText>
+                  </span>{" "}
+                  result every time.
                 </span>
               )}
               description={
@@ -40,8 +46,10 @@ export function Details(props: PropsWithClassName) {
             <ProblemFeature
               renderTitle={() => (
                 <span>
-                  Text-based search, <span>but </span>
-                  <RainbowText>SMART</RainbowText>
+                  👀 No fancy AI, just search{" "}
+                  <span className="font-[Caveat] text-4xl! underline decoration-wavy decoration-amber-200/80 decoration-2 [text-decoration-skip-ink:none] ">
+                    doing its best.
+                  </span>
                 </span>
               )}
               description={
@@ -64,8 +72,9 @@ export function Details(props: PropsWithClassName) {
             <ProblemFeature
               renderTitle={() => (
                 <span>
+                  ⚡{" "}
                   <span className="mr-3 font-[Rubik_Glitch] italic">SPEED</span>{" "}
-                  <span>by design</span>
+                  <span>by design</span>.
                 </span>
               )}
               description={

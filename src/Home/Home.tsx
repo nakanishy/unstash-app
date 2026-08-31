@@ -16,8 +16,8 @@ export function Home() {
       <Steps className="mt-8" />
       <Details />
       <GetEarlyAccess className="mt-8" />
-      <CreatorNote />
-      <Footer />
+      <CreatorNote className="mt-18" />
+      <Footer className="mt-20" />
     </div>
   );
 }
