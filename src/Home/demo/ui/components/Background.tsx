@@ -1,4 +1,10 @@
-import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from "react";
+import {
+  type CSSProperties,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useGlobalMousePos } from "../hooks/useGlobalMousePos";
 import clsx from "clsx";
 
@@ -44,15 +50,14 @@ export function Background(props: Props) {
     <div className="relative size-full">
       <div
         ref={ref}
-        className="absolute inset-0 w-full h-screen rounded-[20px] overflow-hidden"
+        className="absolute inset-0 w-full h-full rounded-[20px] overflow-hidden"
         style={borderStyle}
       />
-
       <div
         className={clsx("relative size-full", props.className)}
         style={{
           borderRadius: 24,
-            backgroundColor: "#00000033",
+          backgroundColor: "#00000033",
         }}
       >
         {props.children}
