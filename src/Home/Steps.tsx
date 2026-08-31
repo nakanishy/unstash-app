@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { Centering } from "../components/Centering";
 import type { PropsWithClassName } from "../types";
+import CallItUp from "./animations/CallItUp";
 
 export function Steps(props: PropsWithClassName) {
   const h = clsx("text-6 text-fg1 font-bold");
@@ -10,7 +11,7 @@ export function Steps(props: PropsWithClassName) {
     <Centering className={props.className}>
       <section className="flex gap-8 px-8">
         <div>
-          <Placeholder />
+          <CallItUp />
           <div className={c}>
             <div className={h}>01 — Call it up</div>
             <p className={p}>
