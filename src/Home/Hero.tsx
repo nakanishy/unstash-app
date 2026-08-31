@@ -46,6 +46,21 @@ export function Hero(props: PropsWithClassName) {
         )}
         style={{ x: backgroundX, y: backgroundY }}
       />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage: `linear-gradient(to bottom, #00000000 0%, #00000000 80%, #000000 100%)`,
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          opacity: 0.8,
+          backgroundImage: `linear-gradient(-32deg, #00000000 0%,#00000000 50%, #000000 100%)`,
+        }}
+      />
       <Header className="relative z-0" />
       <Centering className={clsx("relative z-0", props.className)}>
         <section className={clsx("flex items-center px-8", "h-[600px]")}>
