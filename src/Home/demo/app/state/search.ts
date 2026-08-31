@@ -3,6 +3,117 @@ import { type Sample } from "../../core/Sample";
 
 const LIMIT = 30;
 
+const MOCK_SAMPLE_NAMES = [
+  "808-deep-sub.wav",
+  "808-glide-long.wav",
+  "analog-bass-hit.wav",
+  "analog-drum-loop-92.wav",
+  "air-vocal-chop.wav",
+  "bass-growl-clean.wav",
+  "cassette-hiss.wav",
+  "clap-tight-room.wav",
+  "closed-hat-bright.wav",
+  "crash-soft-tail.wav",
+  "digital-pluck.wav",
+  "dusty-break-01.wav",
+  "foley-paper-drop.wav",
+  "kick-heavy-01.wav",
+  "kick-punchy-short.wav",
+  "kick-subtle-room.wav",
+  "lofi-chord-loop.wav",
+  "lofi-noise-swell.wav",
+  "metal-hit-resonant.wav",
+  "open-hat-wide.wav",
+  "perc-glass.wav",
+  "rim-shot-dry.wav",
+  "snare-crack.wav",
+  "snare-tape-02.wav",
+  "synth-riser-04.wav",
+  "texture-vinyl.wav",
+  "tom-low-round.wav",
+  "vocal-breath.wav",
+  "wood-click.wav",
+  "zap-short.wav",
+  "808-wide-tail.wav",
+  "bass-note-fuzzy.wav",
+  "clap-layered.wav",
+  "kick-boom.wav",
+  "snare-roomy.wav",
+  "synth-pulse.wav",
+];
+
+type SearchArgs = {
+  query: string;
+  page: number;
+  limit: number;
+  seed: number;
+};
+
+type WaveformArgs = {
+  fullpath: string;
+  width: number;
+};
+
+function wait(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function seededSort<T>(items: T[], seed: number) {
+  return [...items].sort((a, b) => {
+    const valueA = hashValue(`${seed}:${String(a)}`);
+    const valueB = hashValue(`${seed}:${String(b)}`);
+    return valueA - valueB;
+  });
+}
+
+function hashValue(value: string) {
+  let hash = 2166136261;
+
+  for (const character of value) {
+    hash ^= character.charCodeAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return hash >>> 0;
+}
+
+async function invoke<T>(command: string, args: SearchArgs | WaveformArgs) {
+  if (command === "search") {
+    const { query, page, limit, seed } = args as SearchArgs;
+    const normalizedQuery = query.trim().toLowerCase();
+    const matches = MOCK_SAMPLE_NAMES.filter((name) =>
+      name.toLowerCase().includes(normalizedQuery),
+    );
+    const results = seededSort(matches, seed).slice(
+      page * limit,
+      (page + 1) * limit,
+    );
+
+    await wait(90);
+    return {
+      total: matches.length,
+      results: results.map((name) => ({
+        path: `/Demo Samples/${name}`,
+      })),
+    } as T;
+  }
+
+  const { fullpath, width } = args as WaveformArgs;
+  const hash = hashValue(fullpath);
+  const length = Math.min(Math.max(Math.floor(width / 12), 48), 120);
+  const data = Array.from({ length }, (_, index) => {
+    const wave = Math.abs(
+      Math.sin((index + 1) * 0.43 + (hash % 37)) * 0.62 +
+        Math.sin((index + 1) * 0.11 + (hash % 19)) * 0.28,
+    );
+    const envelope = 0.55 + 0.45 * Math.sin((index / length) * Math.PI);
+    return Math.min(1, wave * envelope + 0.04);
+  });
+
+  await wait(40 + (hash % 100));
+  return data as T;
+}
+
 export function useSearchState() {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);

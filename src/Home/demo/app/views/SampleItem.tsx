@@ -1,7 +1,7 @@
 import { type HTMLMotionProps, motion } from "motion/react";
 import { type PointerEvent as ReactPointerEvent, useRef } from "react";
 import { type Sample } from "../../core/Sample";
-import { type PlaybackState } from "../state/player";
+import { stopPlayback, type PlaybackState } from "../state/player";
 import clsx from "clsx";
 import { Clip } from "./Clip";
 import { clamp } from "../utils";
@@ -162,7 +162,7 @@ export function SampleItem({
               }}
               onPointerDownCapture={(e) => {
                 e.stopPropagation();
-                invoke("stop");
+                stopPlayback();
                 setTimeout(() => {
                   focusInput();
                 }, 0);

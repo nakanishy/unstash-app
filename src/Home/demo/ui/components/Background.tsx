@@ -1,5 +1,4 @@
-import { invoke } from "@tauri-apps/api/core";
-import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
+import { type CSSProperties, type ReactNode, useEffect, useRef, useState } from "react";
 import { useGlobalMousePos } from "../hooks/useGlobalMousePos";
 import clsx from "clsx";
 
@@ -12,14 +11,6 @@ export function Background(props: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [angle, setAngle] = useState(0);
   const globalMousePos = useGlobalMousePos();
-
-  const [version, setVersion] = useState<number | null>(null);
-
-  useEffect(() => {
-    invoke<number | null>("get_macos_version").then((version) => {
-      setVersion(version);
-    });
-  }, []);
 
   useEffect(() => {
     const rect = ref.current?.getBoundingClientRect();
@@ -61,8 +52,7 @@ export function Background(props: Props) {
         className={clsx("relative size-full", props.className)}
         style={{
           borderRadius: 24,
-          backgroundColor:
-            version !== null && version >= 14 ? "#00000033" : "#0f0f0f",
+            backgroundColor: "#00000033",
         }}
       >
         {props.children}

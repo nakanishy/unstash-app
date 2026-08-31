@@ -1,7 +1,7 @@
 import { createRef, type RefObject, useEffect, useRef } from "react";
 import clsx from "clsx";
 import { useSearchState } from "./state/search";
-import { usePlaybackState } from "./state/player";
+import { playSample, stopPlayback, usePlaybackState } from "./state/player";
 import { Background } from "../ui/components/Background";
 import { Header } from "./views/Header";
 import { SearchInput } from "./views/SearchInput";
@@ -21,6 +21,7 @@ export function AppRoot() {
     seed,
     waveformData,
     selectedIndex,
+    setSelectedIndex,
     hasMore,
     setPage,
     refreshSeed,
@@ -47,7 +48,7 @@ export function AppRoot() {
 
   return (
     <div
-      className="relative w-full h-screen overflow-hidden select-none"
+      className="relative w-full h-full overflow-hidden select-none"
       onClick={focusInput}
     >
       <Background>
@@ -65,7 +66,7 @@ export function AppRoot() {
             query={query}
             total={total}
             onShuffleClick={() => {
-              // invoke("stop");
+              stopPlayback();
               refreshSeed();
             }}
           />
@@ -82,7 +83,10 @@ export function AppRoot() {
             scrollResetKey={`${query}-${seed}`}
             itemHeight={clipHeight}
             focusInput={focusInput}
-            onItemClick={() => {}}
+            onItemClick={(sample, index) => {
+              setSelectedIndex(index);
+              playSample(sample.fullpath);
+            }}
             onDragStart={() => {}}
             onReachBottom={() => setPage((p) => p + 1)}
             onContextMenu={() => {}}
@@ -106,7 +110,7 @@ function useResizeWindowOnQueryChange(query: string) {
 
 function useStopPlaybackOnQueryChange(query: string) {
   useEffect(() => {
-    // invoke("stop");
+    stopPlayback();
   }, [query]);
 }
 

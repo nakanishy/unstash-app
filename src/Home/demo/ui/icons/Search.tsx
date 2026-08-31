@@ -1,4 +1,4 @@
-import { IconProps } from "./props";
+import { type IconProps } from "./props";
 
 export function Search({
   size = 24,

@@ -1,4 +1,3 @@
-import { cursorPosition } from "@tauri-apps/api/window";
 import { useEffect, useState } from "react";
 
 export function useGlobalMousePos() {
@@ -7,24 +6,17 @@ export function useGlobalMousePos() {
   useEffect(() => {
     let mounted = true;
 
-    const update = async () => {
-      const pos = await cursorPosition();
-
+    const update = (event: PointerEvent) => {
       if (mounted) {
-        setPosition({
-          x: pos.x,
-          y: pos.y,
-        });
+        setPosition({ x: event.clientX, y: event.clientY });
       }
     };
 
-    const interval = setInterval(update, 16);
-
-    update();
+    window.addEventListener("pointermove", update);
 
     return () => {
       mounted = false;
-      clearInterval(interval);
+      window.removeEventListener("pointermove", update);
     };
   }, []);
 

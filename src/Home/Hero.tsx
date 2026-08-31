@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { Centering } from "../components/Centering";
 import type { PropsWithClassName } from "../types";
+import { AppRoot } from "./demo/app/AppRoot";
 
 export function Hero(props: PropsWithClassName) {
   return (
@@ -39,5 +40,9 @@ function Left() {
 }
 
 function Right() {
-  return <div></div>;
+  return (
+    <div className="w-[400px] h-[400px]">
+      <AppRoot />
+    </div>
+  );
 }
