@@ -50,7 +50,15 @@ export function Hero(props: PropsWithClassName) {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0"
         style={{
-          backgroundImage: `linear-gradient(to bottom, #00000000 0%, #00000000 80%, #000000 100%)`,
+          backgroundImage: `linear-gradient(to bottom, #00000000 0%, #00000000 60%, #000000 100%)`,
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          opacity: 0.7,
+          backgroundImage: `linear-gradient(170deg, #00000000 0%, #00000000 80%, #000000 100%)`,
         }}
       />
       <div
@@ -61,9 +69,11 @@ export function Hero(props: PropsWithClassName) {
           backgroundImage: `linear-gradient(-32deg, #00000000 0%,#00000000 50%, #000000 100%)`,
         }}
       />
-      <Header className="relative z-0" />
+      <div className="absolute left-0 top-0 w-full h-full z-0">
+        <Header />
+      </div>
       <Centering className={clsx("relative z-0", props.className)}>
-        <section className={clsx("flex items-center px-8", "h-[600px]")}>
+        <section className={clsx("flex items-center px-8", "h-[800px]")}>
           <Left />
           <Right />
         </section>
