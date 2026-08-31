@@ -16,12 +16,14 @@ export function CreatorNote(props: PropsWithClassName) {
         <div className="text-6 font-bold leading-[1.2]">
           Crafted in Japan with love and care.
         </div>
-        <div className="mt-6">
-          I created this app because I love both music and building software.
-        </div>
-        <div className="mt-4">
-          I hope it makes your creative process a little smoother and sparks
-          inspiration when you’re making something new.
+        <div className="mt-6 text-fg2">
+          <div>
+            I created this app because I love both music and building software.
+          </div>
+          <div className="mt-4">
+            I hope it makes your creative process a little smoother and sparks
+            inspiration when you’re making something new.
+          </div>
         </div>
         <a
           className="block mt-6"
