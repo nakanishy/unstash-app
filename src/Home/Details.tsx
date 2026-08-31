@@ -46,7 +46,7 @@ export function Details(props: PropsWithClassName) {
             <ProblemFeature
               renderTitle={() => (
                 <span>
-                  👀 No fancy AI, just search{" "}
+                  🐣 No fancy AI, just search{" "}
                   <span className="font-[Caveat] text-4xl! underline decoration-wavy decoration-amber-200/80 decoration-2 [text-decoration-skip-ink:none] ">
                     doing its best.
                   </span>
