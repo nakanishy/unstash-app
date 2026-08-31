@@ -36,6 +36,24 @@ export function AppRoot(props: Props) {
   useStopPlaybackOnQueryChange(query);
   useResetScrollOnQueryChange(query, scrollRef);
 
+  useEffect(() => {
+    const runScenario = async () => {
+      await wait(1000);
+      changeQuery("k");
+      await wait(700);
+      changeQuery("ki");
+      await wait(800);
+      changeQuery("kic");
+      await wait(900);
+      changeQuery("kick");
+      await wait(3000);
+      changeQuery("");
+      await wait(3000);
+      await runScenario();
+    };
+    runScenario();
+  }, []);
+
   const focusInput = () => inputRef.current?.focus();
   const handleEscDown = () => {
     if (query === "") {
@@ -126,4 +144,10 @@ function useResetScrollOnQueryChange(
       scrollRef.current.scrollTop = 0;
     }
   }, [query]);
+}
+
+function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 }
