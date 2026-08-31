@@ -37,7 +37,7 @@ export function Hero(props: PropsWithClassName) {
       <Centering className={clsx("relative z-0", props.className)}>
         <section className={clsx("flex items-center px-8", "h-[700px]")}>
           <Left />
-          <Right />
+          <Right className="shrink-0 w-[580px]" />
         </section>
       </Centering>
     </div>
@@ -69,17 +69,20 @@ function Left() {
   );
 }
 
-function Right() {
+function Right(props: PropsWithClassName) {
   const [mode, setMode] = useState("collapsed");
   return (
     <motion.div
-      className="mt-[-20px] border border-[#ffffff33] rounded-[24px] bg-black/40 transform"
+      className={clsx(
+        "mt-[-20px] border border-[#ffffff33] rounded-[24px] bg-black/40 transform",
+        props.className,
+      )}
       style={{
         boxShadow: `0 6px 30px 6px rgba(255, 255, 255, 0.06)`,
         backdropFilter: "blur(20px)",
       }}
       animate={{
-        width: mode === "expanded" ? 550 : 380,
+        width: mode === "expanded" ? 580 : 380,
         height: mode === "expanded" ? 400 : 67,
       }}
       transition={{
