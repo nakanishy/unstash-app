@@ -194,6 +194,7 @@ export function SearchInput({
             };
           }}
           className={clsx(commonClassName, inputClassName)}
+          readOnly={true}
           type="text"
           value={value}
           placeholder=""
