@@ -2,17 +2,19 @@ import clsx from "clsx";
 import { Centering } from "../components/Centering";
 import type { PropsWithClassName } from "../types";
 import { AppRoot } from "./demo/app/AppRoot";
-import { motion, useScroll } from "motion/react";
+import { motion } from "motion/react";
 import { useState } from "react";
 
 export function Hero(props: PropsWithClassName) {
   return (
-    <Centering className={props.className}>
-      <section className={clsx("flex items-center px-8", "h-[600px]")}>
-        <Left />
-        <Right />
-      </section>
-    </Centering>
+    <div className={clsx("bg-[url(/images/bg.jpg)]", "bg-cover bg-center")}>
+      <Centering className={props.className}>
+        <section className={clsx("flex items-center px-8", "h-[600px]")}>
+          <Left />
+          <Right />
+        </section>
+      </Centering>
+    </div>
   );
 }
 
@@ -45,9 +47,9 @@ function Right() {
   const [mode, setMode] = useState("collapsed");
   return (
     <motion.div
-      className="w-[500px] border border-[#ffffff33] rounded-[24px] perspective-midrange rotate-y-[-25deg] rotate-x-[3deg] origin-center transform-3d"
+      className="w-[500px] border border-[#ffffff33] rounded-[24px]"
       style={{
-        boxShadow: `25px 30px 45px rgba(0, 0, 0, 0.65),
+        boxShadow: `0px 30px 45px rgba(0, 0, 0, 0.65),
           inset 0 0 20px rgba(255, 255, 255, 0.025)`,
       }}
       animate={{
