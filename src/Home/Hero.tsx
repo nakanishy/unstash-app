@@ -45,7 +45,11 @@ function Right() {
   const [mode, setMode] = useState("collapsed");
   return (
     <motion.div
-      className="w-[500px] border border-[#ffffff33] rounded-[24px]"
+      className="w-[500px] border border-[#ffffff33] rounded-[24px] perspective-midrange rotate-y-[-25deg] rotate-x-[3deg] origin-center transform-3d"
+      style={{
+        boxShadow: `25px 30px 45px rgba(0, 0, 0, 0.65),
+          inset 0 0 20px rgba(255, 255, 255, 0.025)`,
+      }}
       animate={{
         height: mode === "expanded" ? 400 : 67,
       }}
@@ -57,3 +61,10 @@ function Right() {
     </motion.div>
   );
 }
+
+// <motion.div
+//   className="w-[500px] border border-[#ffffff33] rounded-[24px] perspective-midrange rotate-y-[-25deg] rotate-x-[3deg] origin-center transform-3d"
+//   style={{
+//     boxShadow: `25px 30px 45px rgba(0, 0, 0, 0.65),
+//       inset 0 0 20px rgba(255, 255, 255, 0.025)`,
+//   }}
