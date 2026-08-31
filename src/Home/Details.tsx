@@ -79,7 +79,7 @@ export function Details(props: PropsWithClassName) {
                 </>
               }
             />
-            <div className="h-[160px] rounded-[18px] bg-white-subtle" />
+            <div className="h-[360px] rounded-[18px] bg-white-subtle" />
           </div>
         </div>
       </section>
