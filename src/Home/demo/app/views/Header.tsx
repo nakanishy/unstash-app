@@ -1,5 +1,4 @@
 import { headerHeight } from "../styles/variables";
-const isDev = import.meta.env.DEV;
 
 export function Header() {
   return (
@@ -8,7 +7,6 @@ export function Header() {
       style={{ height: headerHeight }}
       data-tauri-drag-region={true}
     >
-      {isDev && <div className="size-[8px] rounded-full bg-green-500" />}
       {/*
       <div className="ml-3 w-[40px] h-[22px] perspective-[500]">
         <motion.div

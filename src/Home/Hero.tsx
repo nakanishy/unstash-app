@@ -2,6 +2,8 @@ import clsx from "clsx";
 import { Centering } from "../components/Centering";
 import type { PropsWithClassName } from "../types";
 import { AppRoot } from "./demo/app/AppRoot";
+import { motion, useScroll } from "motion/react";
+import { useState } from "react";
 
 export function Hero(props: PropsWithClassName) {
   return (
@@ -40,9 +42,18 @@ function Left() {
 }
 
 function Right() {
+  const [mode, setMode] = useState("collapsed");
   return (
-    <div className="w-[400px] h-[400px]">
-      <AppRoot />
-    </div>
+    <motion.div
+      className="w-[500px] border border-[#ffffff33] rounded-[24px]"
+      animate={{
+        height: mode === "expanded" ? 400 : 67,
+      }}
+      transition={{
+        duration: 0.14,
+      }}
+    >
+      <AppRoot onModeChange={setMode} />
+    </motion.div>
   );
 }

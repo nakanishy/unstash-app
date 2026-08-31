@@ -9,7 +9,11 @@ import { Toolbar } from "./views/Toolbar";
 import { clipHeight } from "./styles/variables";
 import { SampleList } from "./views/SampleList/SampleList";
 
-export function AppRoot() {
+type Props = {
+  onModeChange: (mode: string) => void;
+};
+
+export function AppRoot(props: Props) {
   const inputRef = createRef<HTMLInputElement | null>();
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -28,7 +32,7 @@ export function AppRoot() {
   } = useSearchState();
   const playbackState = usePlaybackState();
 
-  useResizeWindowOnQueryChange(query);
+  useResizeWindowOnQueryChange(query, props.onModeChange);
   useStopPlaybackOnQueryChange(query);
   useResetScrollOnQueryChange(query, scrollRef);
 
@@ -98,14 +102,13 @@ export function AppRoot() {
   );
 }
 
-function useResizeWindowOnQueryChange(query: string) {
+function useResizeWindowOnQueryChange(
+  query: string,
+  onModeChange: (mode: string) => void,
+) {
   useEffect(() => {
-    // invoke("set_window_mode", {
-    //   mode: query ? "expanded" : "collapsed",
-    // }).catch((error) => {
-    //   console.error("set_window_mode failed:", error);
-    // });
-  }, [query]);
+    onModeChange(query ? "expanded" : "collapsed");
+  }, [query, onModeChange]);
 }
 
 function useStopPlaybackOnQueryChange(query: string) {
