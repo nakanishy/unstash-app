@@ -5,11 +5,11 @@ import {
   useEffect,
   useRef,
   useState,
-  type ButtonHTMLAttributes,
   type CSSProperties,
   type ReactNode,
 } from "react";
 import { motion } from "motion/react";
+import { WaveText } from "../components/WaveText";
 
 export function GetEarlyAccess(props: PropsWithClassName) {
   return (
@@ -19,8 +19,14 @@ export function GetEarlyAccess(props: PropsWithClassName) {
           Get early access
         </h1>
         <p className="mt-4 max-w-[700px] text-5 text-black/70">
-          Sign up to receive product launch updates, beta testing opportunities,
-          and invitations to user interviews.
+          Sign up to receive{" "}
+          <WaveText
+            text="product launch updates"
+            amplitude={3}
+            duration={1.6}
+            delay={0.1}
+          />
+          , beta testing opportunities, and invitations to user interviews.
         </p>
         <GlowButton className="mt-6">Join the waitlist</GlowButton>
       </Centering>
