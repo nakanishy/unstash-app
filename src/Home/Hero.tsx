@@ -101,7 +101,7 @@ function Right() {
   const [mode, setMode] = useState("collapsed");
   return (
     <motion.div
-      className="w-[500px] border border-[#ffffff33] rounded-[24px] bg-black/40"
+      className="mt-[-70px] w-[500px] border border-[#ffffff33] rounded-[24px] bg-black/40"
       style={{
         boxShadow: `0px 30px 45px rgba(0, 0, 0, 0.65),
           inset 0 0 20px rgba(255, 255, 255, 0.025)`,
