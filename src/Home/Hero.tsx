@@ -2,78 +2,40 @@ import clsx from "clsx";
 import { Centering } from "../components/Centering";
 import type { PropsWithClassName } from "../types";
 import { AppRoot } from "./demo/app/AppRoot";
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { motion } from "motion/react";
 import { useState } from "react";
 import { Header } from "../components/Header";
-
-const STRENGTH = 30;
+import SubtleParticleBg from "../components/SubtleParticleBg";
 
 export function Hero(props: PropsWithClassName) {
-  const backgroundX = useSpring(useMotionValue(0), {
-    stiffness: 120,
-    damping: 20,
-    mass: 0.5,
-  });
-  const backgroundY = useSpring(useMotionValue(0), {
-    stiffness: 120,
-    damping: 20,
-    mass: 0.5,
-  });
-
   return (
-    <div
-      className="relative overflow-hidden"
-      onPointerMove={(event) => {
-        if (event.pointerType !== "mouse") return;
-
-        const bounds = event.currentTarget.getBoundingClientRect();
-        const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-        const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-
-        backgroundX.set(x * STRENGTH);
-        backgroundY.set(y * STRENGTH);
-      }}
-      onPointerLeave={() => {
-        backgroundX.set(0);
-        backgroundY.set(0);
-      }}
-    >
-      <motion.div
-        aria-hidden="true"
-        className={clsx(
-          "pointer-events-none absolute -inset-[18px] bg-[url(/images/bg.jpg)]",
-          "bg-cover bg-center z-0",
-        )}
-        style={{ x: backgroundX, y: backgroundY }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          backgroundImage: `linear-gradient(to bottom, #00000000 0%, #00000000 60%, #000000 100%)`,
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          opacity: 0.7,
-          backgroundImage: `linear-gradient(170deg, #00000000 0%, #00000000 80%, #000000 100%)`,
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          opacity: 0.8,
-          backgroundImage: `linear-gradient(-32deg, #00000000 0%,#00000000 50%, #000000 100%)`,
-        }}
-      />
+    <div className="relative overflow-hidden">
       <div className="absolute left-0 top-0 w-full h-full z-0">
         <Header />
       </div>
+      <SubtleParticleBg />
+      <div
+        aria-hidden="true"
+        className="
+               pointer-events-none
+               absolute
+               inset-0
+               opacity-[0.035]
+               [background-image:radial-gradient(rgba(255,255,255,0.8)_0.6px,transparent_0.6px)]
+               [background-size:5px_5px]
+             "
+      />
+      <div
+        aria-hidden="true"
+        className="
+               pointer-events-none
+               absolute
+               inset-0
+               bg-[radial-gradient(circle_at_50%_35%,rgba(255,255,255,0.025),transparent_45%),linear-gradient(to_bottom,transparent_65%,rgba(0,0,0,0.65))]
+             "
+      />
       <Centering className={clsx("relative z-0", props.className)}>
-        <section className={clsx("flex items-center px-8", "h-[800px]")}>
+        <section className={clsx("flex items-center px-8", "h-[700px]")}>
           <Left />
           <Right />
         </section>
@@ -111,13 +73,13 @@ function Right() {
   const [mode, setMode] = useState("collapsed");
   return (
     <motion.div
-      className="mt-[-70px] w-[500px] border border-[#ffffff33] rounded-[24px] bg-black/40"
+      className="mt-[-20px] border border-[#ffffff33] rounded-[24px] bg-black/40 transform"
       style={{
-        boxShadow: `0px 30px 45px rgba(0, 0, 0, 0.65),
-          inset 0 0 20px rgba(255, 255, 255, 0.025)`,
+        boxShadow: `0 6px 30px 6px rgba(255, 255, 255, 0.06)`,
         backdropFilter: "blur(20px)",
       }}
       animate={{
+        width: mode === "expanded" ? 550 : 380,
         height: mode === "expanded" ? 400 : 67,
       }}
       transition={{
