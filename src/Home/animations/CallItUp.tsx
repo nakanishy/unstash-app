@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion, useAnimate } from "motion/react";
 
 const shortcutKeys = ["⌘", "⌥", "F"];
 const searchText = "hihat loop";
+
+const DESIGN_WIDTH = 450;
+const DESIGN_HEIGHT = 230;
 
 const sleep = (duration: number) =>
   new Promise<void>((resolve) => {
@@ -12,6 +15,29 @@ const sleep = (duration: number) =>
 export default function CallItUp() {
   const [scope, animate] = useAnimate();
   const [typedText, setTypedText] = useState("");
+  const [scale, setScale] = useState(1);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const updateScale = () => {
+      const { width, height } = container.getBoundingClientRect();
+      const nextScale = Math.min(width / DESIGN_WIDTH, height / DESIGN_HEIGHT);
+      setScale(nextScale);
+    };
+
+    updateScale();
+
+    const observer = new ResizeObserver(updateScale);
+    observer.observe(container);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -55,7 +81,6 @@ export default function CallItUp() {
           {
             opacity: 0,
             scale: 0.96,
-            y: -4,
           },
           {
             duration: 0.15,
@@ -110,7 +135,6 @@ export default function CallItUp() {
           ".key",
           {
             opacity: 0,
-            y: 8,
             scale: 0.92,
           },
           {
@@ -123,7 +147,6 @@ export default function CallItUp() {
           {
             opacity: 1,
             scale: 1,
-            y: 0,
           },
           {
             duration: 0,
@@ -135,7 +158,6 @@ export default function CallItUp() {
           {
             opacity: 0,
             scale: 0.82,
-            y: 18,
             filter: "blur(8px)",
           },
           {
@@ -154,7 +176,7 @@ export default function CallItUp() {
 
   return (
     <div
-      ref={scope}
+      ref={containerRef}
       className="
         w-full max-w-[450px] aspect-[45/23]
         flex items-center justify-center
@@ -164,83 +186,82 @@ export default function CallItUp() {
         shadow-2xl
       "
     >
-      <div className="relative flex h-full w-full items-center justify-center">
-        {/* キーボードショートカット */}
-        <motion.div
-          className="shortcut absolute
-          mt-[-24px]
+      <div
+        ref={scope}
+        className="relative size-full"
+        style={{
+          transform: `scale(${scale})`,
+          transformOrigin: "center",
+          willChange: "transform",
+        }}
+      >
+        <div className="absolute inset-0 size-full flex items-center justify-center">
+          {/* キーボードショートカット */}
+          <motion.div
+            className="shortcut
           flex items-center justify-center gap-1.5 whitespace-nowrap"
-          initial={{
-            opacity: 1,
-            scale: 1,
-            y: 0,
-          }}
-        >
-          {shortcutKeys.map((key, index) => (
-            <motion.span
-              key={key}
-              id={`shortcut-key-${index}`}
-              className="
+            initial={{
+              opacity: 1,
+              scale: 1,
+            }}
+          >
+            {shortcutKeys.map((key, index) => (
+              <motion.span
+                key={key}
+                id={`shortcut-key-${index}`}
+                className="
                 key grid size-12 place-items-center
                 rounded-[13px]
                 bg-white/10
                 text-[21px]
               "
-              initial={{
-                opacity: 0,
-                filter: "blur(4px)",
-                scale: 0.88,
-              }}
-            >
-              {key}
-            </motion.span>
-          ))}
-        </motion.div>
-
-        {/* 検索ボックス */}
-        <motion.div
-          className="
+                initial={{
+                  opacity: 0,
+                  filter: "blur(4px)",
+                  scale: 0.88,
+                }}
+              >
+                {key}
+              </motion.span>
+            ))}
+          </motion.div>
+        </div>
+        <div className="absolute inset-0 size-full flex items-center justify-center">
+          {/* 検索ボックス */}
+          <motion.div
+            className="
             search-box
-            absolute
-            mt-[-40px]
-            flex h-[50px] w-[300px] items-center gap-2.5
+            w-[300px] h-[50px]
+            flex items-center justify-center gap-2.5
             border border-[#ffffff3f]
+            bg-[#ffffff0f]
             rounded-[18px]
             px-4
             shadow-md
             shadow-white/03
             select-none
           "
-          initial={{
-            opacity: 0,
-            scale: 0.93,
-            filter: "blur(8px)",
-          }}
-        >
-          <Search size={24} className="fill-white/33" />
-          <input
-            aria-label="Search words"
-            value={typedText}
-            readOnly
-            className="
+            initial={{
+              opacity: 0,
+              scale: 0.93,
+              filter: "blur(8px)",
+            }}
+          >
+            <Search size={24} className="fill-white/33" />
+            <input
+              aria-label="Search words"
+              value={typedText}
+              readOnly
+              className="
               min-w-0 flex-1
               border-0 bg-transparent p-0
               text-lg tracking-wide text-slate-100
               outline-none
             "
-          />
-        </motion.div>
+            />
+          </motion.div>
+        </div>
       </div>
-      <style>{`
-        @keyframes blink {
-          0%, 45% {
-            opacity: 1;
-          }
-          46%, 100% {
-            opacity: 0;
-          }
-        }
-      `}</style>
     </div>
   );
 }
