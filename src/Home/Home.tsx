@@ -15,7 +15,7 @@ export function Home() {
       <NotManager />
       <Steps className="mt-8" />
       <Details />
-      <GetEarlyAccess />
+      <GetEarlyAccess className="mt-8" />
       <CreatorNote />
       <Footer />
     </div>
