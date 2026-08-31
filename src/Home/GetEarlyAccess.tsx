@@ -10,12 +10,25 @@ import {
 } from "react";
 import { motion } from "motion/react";
 import { WaveText } from "../components/WaveText";
+import { ShimmerText } from "../components/ShimmerText";
 
 export function GetEarlyAccess(props: PropsWithClassName) {
   return (
     <section className={clsx("py-8 bg-white", props.className)}>
       <Centering>
-        <h1 className="text-8 leading-[1.2] text-black font-bold">
+        <h1
+          className="inline-block text-8 leading-[1.2] text-fg1 font-bold italic uppercase bg-black"
+          style={{
+            paddingLeft: 10,
+            paddingRight: 20,
+            clipPath: `polygon(
+              10px 0,       /* 左上 */
+              100% 0,       /* 右上 */
+              calc(100% - 10px) 100%, /* 右下 */
+              0 100%        /* 左下 */
+            )`,
+          }}
+        >
           Get early access
         </h1>
         <p className="mt-4 max-w-[700px] text-5 text-black/70">
@@ -28,7 +41,15 @@ export function GetEarlyAccess(props: PropsWithClassName) {
           />
           , beta testing opportunities, and invitations to user interviews.
         </p>
-        <GlowButton className="mt-6">Join the waitlist</GlowButton>
+        <GlowButton className="mt-6">
+          <ShimmerText
+            duration={1.5}
+            baseColor="#ffffffbb"
+            highlightColor="#ffffff"
+          >
+            Join the waitlist
+          </ShimmerText>
+        </GlowButton>
       </Centering>
     </section>
   );
@@ -114,7 +135,7 @@ export function GlowButton({ children, className, ...props }: GlowButtonProps) {
     borderRadius: 18,
     padding: 3,
     backgroundImage:
-      "linear-gradient(var(--angle), #ffffff00, #ffffff00, #ffffff99, #ffffff00, #ffffff00)",
+      "linear-gradient(var(--angle), #ffffff00, #ffffff00, #ffffffbb, #ffffff00, #ffffff00)",
     mask: `
       linear-gradient(#000 0 0) content-box,
       linear-gradient(#000 0 0)
