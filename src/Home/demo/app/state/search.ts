@@ -1,7 +1,29 @@
 import { useEffect, useRef, useState } from "react";
 import { type Sample } from "../../core/Sample";
+import {
+  drumLoop,
+  hihatLoop,
+  drumLoop2,
+  kick1,
+  kick_electro,
+  kick_fear,
+  kick_hard,
+  kick_house,
+  kick_punchy,
+} from "./waveData";
 
 const LIMIT = 30;
+const waves = [
+  hihatLoop,
+  drumLoop,
+  drumLoop2,
+  kick1,
+  kick_electro,
+  kick_fear,
+  kick_hard,
+  kick_house,
+  kick_punchy,
+];
 
 const MOCK_SAMPLE_NAMES = [
   "808-deep-sub.wav",
@@ -89,7 +111,6 @@ async function invoke<T>(command: string, args: SearchArgs | WaveformArgs) {
       (page + 1) * limit,
     );
 
-    await wait(90);
     return {
       total: matches.length,
       results: results.map((name) => ({
@@ -97,20 +118,8 @@ async function invoke<T>(command: string, args: SearchArgs | WaveformArgs) {
       })),
     } as T;
   }
-
-  const { fullpath, width } = args as WaveformArgs;
-  const hash = hashValue(fullpath);
-  const length = Math.min(Math.max(Math.floor(width / 12), 48), 120);
-  const data = Array.from({ length }, (_, index) => {
-    const wave = Math.abs(
-      Math.sin((index + 1) * 0.43 + (hash % 37)) * 0.62 +
-        Math.sin((index + 1) * 0.11 + (hash % 19)) * 0.28,
-    );
-    const envelope = 0.55 + 0.45 * Math.sin((index / length) * Math.PI);
-    return Math.min(1, wave * envelope + 0.04);
-  });
-
-  await wait(40 + (hash % 100));
+  const i = Math.floor(Math.random() * waves.length);
+  const data = waves[i];
   return data as T;
 }
 
