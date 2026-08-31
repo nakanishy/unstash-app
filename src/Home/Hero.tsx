@@ -57,7 +57,7 @@ export function Hero(props: PropsWithClassName) {
 function Left() {
   return (
     <div className="w-full md:w-[800px]">
-      <h1 className="text-6xl text-fg1">
+      <h1 className="text-[68px] leading-[1] text-fg1">
         Find the sound.
         <br />
         <div className="font-bold">Keep the flow.</div>
@@ -94,9 +94,16 @@ function Right(props: PropsWithClassName) {
       animate={{
         width: mode === "expanded" ? 580 : 380,
         height: mode === "expanded" ? 400 : 67,
+        y: [0, -4, 0],
       }}
       transition={{
-        duration: 0.14,
+        width: { duration: 0.14 },
+        height: { duration: 0.14 },
+        y: {
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        },
       }}
     >
       <AppRoot onModeChange={setMode} />
