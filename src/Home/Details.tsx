@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
 import { Centering } from "../components/Centering";
 import { WaveText } from "../components/WaveText";
-import { RainbowText } from "../components/RainbowText";
 import type { PropsWithClassName } from "../types";
 import { GradientText } from "../components/GradientText";
+import { Search } from "../icons/Search";
 
 export function Details(props: PropsWithClassName) {
   return (
@@ -54,19 +54,14 @@ export function Details(props: PropsWithClassName) {
               )}
               description={
                 <>
-                  Filtering by key like key:C#min, tempo like 120-130, not
-                  operator, phrase search like “exact match”, OR operator, etc.
+                  Unstash keeps the interface simple: one input box.
                   <br />
-                  <br />
-                  Unstash understands where the samples are in a directory, so
-                  you can search the way you think.
-                  <br />
-                  <br />
-                  Result very fast because its text based, yet smart.
+                  Underneath, though, there’s a surprisingly powerful search
+                  engine doing its best.
                 </>
               }
             />
-            <div className="h-full rounded-[18px] bg-white-subtle" />
+            <SearchExamples />
           </div>
           <div className="grid grid-cols-[1fr_1fr] gap-12">
             <ProblemFeature
@@ -109,23 +104,42 @@ function ProblemFeature({
   );
 }
 
-function SampleResults() {
-  const results = [
-    ["hihat loop 120-130", "UMA_Hat_loops_125BPM_30.wav"],
-    ["kick not 808", "VL_hi-hat_loop_120_BPM"],
-    ["snare or clap splice", "UMA_Hat_loops_125BPM_30.wav"],
-    ["piano key:C#min", "VL_hi-hat_loop_120_BPM"],
+type Result = {
+  query: string;
+  samples: string[];
+};
+
+function SearchExamples() {
+  const results: Result[] = [
+    {
+      query: "kick",
+      samples: ["kck.wav", "kick.wav"],
+    },
+    {
+      query: "hihat loop 120-130",
+      samples: ["hat_loop_125_BPM.wav"],
+    },
+    {
+      query: "hihat or top loop 120-130",
+      samples: ["Top Loop 130BPM (A#).wav", "hihat_loop_125BPM.wav"],
+    },
   ];
 
   return (
     <div className="rounded-[6px] bg-white-very-subtle p-4">
-      {results.map(([query, result]) => (
-        <div
-          className="grid grid-cols-[1fr_1.25fr] gap-4 py-3 text-1 leading-[1.35] first:pt-0 last:pb-0"
-          key={query}
-        >
-          <span className="font-bold text-fg1">{query}</span>
-          <span className="text-fg2">{result}</span>
+      {results.map(({ query, samples }) => (
+        <div className="" key={query}>
+          <div className="flex items-center gap-2">
+            <Search size={20} />
+            <span className="font-bold text-fg1 text-4">{query}</span>
+          </div>
+          <div>
+            {samples.map((sample, i) => (
+              <div key={i} className="text-fg2">
+                {sample}
+              </div>
+            ))}
+          </div>
         </div>
       ))}
     </div>
