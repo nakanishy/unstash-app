@@ -1,4 +1,5 @@
 import { Header } from "../components/Header";
+import { CreatorNote } from "./CreatorNote";
 import { Details } from "./Details";
 import { Hero } from "./Hero";
 import { NotManager } from "./NotManager";
@@ -12,6 +13,7 @@ export function Home() {
       <NotManager />
       <Steps className="mt-8" />
       <Details />
+      <CreatorNote />
     </div>
   );
 }
