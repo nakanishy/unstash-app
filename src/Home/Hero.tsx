@@ -20,6 +20,16 @@ export function Hero(props: PropsWithClassName) {
                pointer-events-none
                absolute
                inset-0
+               opacity-[0.1]
+               [background-image:linear-gradient(to_bottom,#00000000_0%,#ffffff_50%,#00000000_100%)]
+             "
+      />
+      <div
+        aria-hidden="true"
+        className="
+               pointer-events-none
+               absolute
+               inset-0
                opacity-[0.035]
                [background-image:radial-gradient(rgba(255,255,255,0.8)_0.6px,transparent_0.6px)]
                [background-size:5px_5px]
@@ -47,7 +57,7 @@ export function Hero(props: PropsWithClassName) {
 function Left() {
   return (
     <div className="w-full md:w-[800px]">
-      <h1 className="text-7xl text-fg1">
+      <h1 className="text-6xl text-fg1">
         Find the sound.
         <br />
         <div className="font-bold">Keep the flow.</div>
