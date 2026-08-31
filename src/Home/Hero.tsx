@@ -4,6 +4,7 @@ import type { PropsWithClassName } from "../types";
 import { AppRoot } from "./demo/app/AppRoot";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import { useState } from "react";
+import { Header } from "../components/Header";
 
 const STRENGTH = 30;
 
@@ -45,6 +46,7 @@ export function Hero(props: PropsWithClassName) {
         )}
         style={{ x: backgroundX, y: backgroundY }}
       />
+      <Header className="relative z-0" />
       <Centering className={clsx("relative z-0", props.className)}>
         <section className={clsx("flex items-center px-8", "h-[600px]")}>
           <Left />
