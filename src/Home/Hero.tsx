@@ -2,13 +2,50 @@ import clsx from "clsx";
 import { Centering } from "../components/Centering";
 import type { PropsWithClassName } from "../types";
 import { AppRoot } from "./demo/app/AppRoot";
-import { motion } from "motion/react";
+import { motion, useMotionValue, useSpring } from "motion/react";
 import { useState } from "react";
 
+const STRENGTH = 30;
+
 export function Hero(props: PropsWithClassName) {
+  const backgroundX = useSpring(useMotionValue(0), {
+    stiffness: 120,
+    damping: 20,
+    mass: 0.5,
+  });
+  const backgroundY = useSpring(useMotionValue(0), {
+    stiffness: 120,
+    damping: 20,
+    mass: 0.5,
+  });
+
   return (
-    <div className={clsx("bg-[url(/images/bg.jpg)]", "bg-cover bg-center")}>
-      <Centering className={props.className}>
+    <div
+      className="relative overflow-hidden"
+      onPointerMove={(event) => {
+        if (event.pointerType !== "mouse") return;
+
+        const bounds = event.currentTarget.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+        const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+
+        backgroundX.set(x * STRENGTH);
+        backgroundY.set(y * STRENGTH);
+      }}
+      onPointerLeave={() => {
+        backgroundX.set(0);
+        backgroundY.set(0);
+      }}
+    >
+      <motion.div
+        aria-hidden="true"
+        className={clsx(
+          "pointer-events-none absolute -inset-[18px] bg-[url(/images/bg.jpg)]",
+          "bg-cover bg-center z-0",
+        )}
+        style={{ x: backgroundX, y: backgroundY }}
+      />
+      <Centering className={clsx("relative z-0", props.className)}>
         <section className={clsx("flex items-center px-8", "h-[600px]")}>
           <Left />
           <Right />
