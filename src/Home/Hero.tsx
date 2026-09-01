@@ -6,6 +6,8 @@ import { motion } from "motion/react";
 import { useState } from "react";
 import { Header } from "../components/Header";
 import SubtleParticleBg from "../components/SubtleParticleBg";
+import { ShimmerText } from "../components/ShimmerText";
+import { GlowButton } from "../components/GlowButton";
 
 export function Hero(props: PropsWithClassName) {
   return (
@@ -57,6 +59,7 @@ export function Hero(props: PropsWithClassName) {
 function Left() {
   return (
     <div className="w-full md:w-[800px]">
+      <div className="  ">macOS</div>
       <h1 className="text-[68px] leading-[1] text-fg1">
         Find the sound.
         <br />
@@ -68,13 +71,19 @@ function Left() {
         Discover unexpected sounds. Drag them straight into your DAW.
       </p>
       <div className="mt-6">
-        <div className="inline-flex items-center px-6 h-[50px] text-[#000000dd] text-3 font-bold rounded-[14px] bg-white/80">
-          Download for macOS
-        </div>
+        <GlowButton bg="#ffffffdd">
+          <ShimmerText
+            duration={1.5}
+            baseColor="#000000"
+            highlightColor="#ffffff"
+          >
+            <span className="text-3">Join the waitlist</span>
+          </ShimmerText>
+        </GlowButton>
       </div>
-      <div className="mt-4 text-2 text-fg2">
+      {/*<div className="mt-4 text-2 text-fg2">
         One-time purchase · No subscription · 30 days free trial.
-      </div>
+      </div>*/}
     </div>
   );
 }
