@@ -46,7 +46,18 @@ export function AppRoot(props: Props) {
       changeQuery("kic");
       await wait(900);
       changeQuery("kick");
-      await wait(3000);
+      await wait(1900);
+
+      setSelectedIndex(0);
+      playSample("");
+      await wait(2800);
+      setSelectedIndex(1);
+      playSample("");
+      await wait(3800);
+      setSelectedIndex(2);
+      playSample("");
+      await wait(4000);
+
       changeQuery("");
       await wait(3000);
       await runScenario();
