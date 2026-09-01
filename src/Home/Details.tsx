@@ -41,24 +41,23 @@ export function Details(props: PropsWithClassName) {
             <ProblemFeature
               renderTitle={() => (
                 <span>
-                  <span className="mr-3 font-[Rubik_Glitch] italic">
-                    <GradientText
-                      gradient="
-                        linear-gradient(
-                          110deg,
-                          #b7c7ff 0%,
-                          #e3e9ff 24%,
-                          #ffffff 42%,
-                          #8fa4ff 50%,
-                          #c7b9ff 64%,
-                          #f1efff 86%,
-                          #ffffff 100%
-                        )
-                      "
-                    >
-                      SPEED
-                    </GradientText>
-                  </span>{" "}
+                  <GradientText
+                    className="px-3"
+                    gradient="
+                      linear-gradient(
+                        115deg,
+                        #91caff 0%,
+                        #d9f1ff 30%,
+                        #ffffff 44%,
+                        #65b8ff 51%,
+                        #8d9dff 63%,
+                        #e0e7ff 84%,
+                        #ffffff 100%
+                      )
+                    "
+                  >
+                    <span className="font-[Rubik_Glitch] italic">SPEED</span>
+                  </GradientText>{" "}
                   <span>by design</span>.
                 </span>
               )}
@@ -75,7 +74,11 @@ export function Details(props: PropsWithClassName) {
               renderTitle={() => (
                 <span>
                   One box. A real{" "}
-                  <ShimmerText baseColor="#ffffff99" highlightColor="#fffffff0">
+                  <ShimmerText
+                    baseColor="#ffffff99"
+                    highlightColor="#fffffff0"
+                    duration={1.8}
+                  >
                     Search Engine.
                   </ShimmerText>
                 </span>
@@ -83,6 +86,7 @@ export function Details(props: PropsWithClassName) {
               description={
                 <>
                   No AI gimmicks—just sharp, flexible search.
+                  <br />
                   <br />
                   Use Boolean operators like <code>or</code> and{" "}
                   <code>not</code>, filter by key with <code>key:c#m</code>,
