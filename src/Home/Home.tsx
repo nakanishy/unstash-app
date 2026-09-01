@@ -10,10 +10,10 @@ export function Home() {
   return (
     <div className="w-full min-h-full h-auto text-fg1 bg-black">
       <Hero />
-      <NotManager />
-      <Steps className="mt-8" />
+      <Steps className="mt-0" />
       <Details />
       <GetEarlyAccess className="mt-8" />
+      <NotManager />
       <CreatorNote className="mt-18" />
       <Footer className="mt-20" />
     </div>
