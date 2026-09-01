@@ -27,7 +27,7 @@ const waveDatas = [hihatLoop, drumLoop, drumLoop2, snareRoll, clapLoop];
 const items = Array(3).fill(original).flat();
 
 const containerHeight = 230;
-const itemHeight = 50;
+const itemHeight = 44;
 const gap = 8;
 const centerPadding = (containerHeight - itemHeight) / 2;
 const playbackDurationMs = 3000;
@@ -80,10 +80,7 @@ export default function ListAnimation() {
           return;
         }
 
-        const positionMs = Math.min(
-          Date.now() - startedAt,
-          playbackDurationMs,
-        );
+        const positionMs = Math.min(Date.now() - startedAt, playbackDurationMs);
         const finished = positionMs >= playbackDurationMs;
 
         setPlaybackState({
@@ -181,10 +178,7 @@ export default function ListAnimation() {
       ? clamp(playbackState.positionMs / playbackState.durationMs, 0, 1)
       : 0;
   const selectedWaveData = waveDatas[selectedIndex % waveDatas.length];
-  const currentValue = getCurrentWaveValue(
-    selectedWaveData,
-    playbackProgress,
-  );
+  const currentValue = getCurrentWaveValue(selectedWaveData, playbackProgress);
   const playing = playbackState.status === "playing";
 
   const itemClassName = clsx(
@@ -192,7 +186,7 @@ export default function ListAnimation() {
     "flex items-center",
     "relative",
     "px-[8px]",
-    "w-full max-w-[390px] h-[50px] rounded-[12px]",
+    "w-full max-w-[390px] rounded-[12px]",
   );
 
   return (
@@ -242,6 +236,9 @@ export default function ListAnimation() {
             <motion.div
               className={itemClassName}
               key={`${item}-${i}`}
+              style={{
+                height: itemHeight,
+              }}
               animate={{
                 backgroundColor: isSelected ? "#ffffff16" : "transparent",
                 scale: isSelected ? 1 + currentValue * 0.02 : 1,
