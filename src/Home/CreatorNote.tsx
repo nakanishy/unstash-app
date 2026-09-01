@@ -18,11 +18,11 @@ export function CreatorNote(props: PropsWithClassName) {
         </div>
         <div className="mt-6 max-w-[550px] text-fg2">
           <div>
-            I created Unstash because I love both music and building software.
+            I built Unstash because I love music and I love software.
           </div>
           <div className="mt-4">
-            I hope it makes your creative process a little smoother and sparks
-            inspiration when you’re making something new.
+            I hope it makes your creative process smoother — and surprises you
+            with sounds you forgot you had.
           </div>
         </div>
         <a

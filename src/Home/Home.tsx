@@ -2,7 +2,7 @@ import { CreatorNote } from "./CreatorNote";
 import { Details } from "./Details";
 import { Footer } from "./Footer";
 import { Hero } from "./Hero";
-import { NotManager } from "./NotManager";
+import { GetEarlyAccess } from "./GetEarlyAccess";
 import { Steps } from "./Steps";
 
 export function Home() {
@@ -11,8 +11,7 @@ export function Home() {
       <Hero />
       <Steps className="mt-0" />
       <Details />
-      {/*<GetEarlyAccess className="mt-8" />*/}
-      <NotManager className="mt-40" />
+      <GetEarlyAccess className="mt-40" />
       <CreatorNote className="mt-40" />
       <Footer className="mt-20" />
     </div>

@@ -59,16 +59,16 @@ export function Hero(props: PropsWithClassName) {
 function Left() {
   return (
     <div className="w-full md:w-[800px]">
-      <div className="  ">macOS</div>
       <h1 className="text-[68px] leading-[1] text-fg1">
         Find the sound.
         <br />
         <div className="font-bold">Keep the flow.</div>
       </h1>
       <p className="mt-5 text-5 text-fg2 font-normal">
-        Launch instantly. Search your local samples.
+        A Spotlight-style launcher for your sample library.
         <br />
-        Discover unexpected sounds. Drag them straight into your DAW.
+        Press Option + Space, type what you need, audition instantly, and drag
+        the right sound straight into your DAW.
       </p>
       <div className="mt-6">
         <GlowButton bg="#ffffffdd">
@@ -81,6 +81,7 @@ function Left() {
           </ShimmerText>
         </GlowButton>
       </div>
+      <div className="mt-3 text-3 text-fg2">In Development</div>
       {/*<div className="mt-4 text-2 text-fg2">
         One-time purchase · No subscription · 30 days free trial.
       </div>*/}

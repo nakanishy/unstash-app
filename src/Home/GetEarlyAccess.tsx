@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { Centering } from "../components/Centering";
 import type { PropsWithClassName } from "../types";
-import { WaveText } from "../components/WaveText";
 import { ShimmerText } from "../components/ShimmerText";
 import { GlowButton } from "../components/GlowButton";
 
@@ -25,14 +24,8 @@ export function GetEarlyAccess(props: PropsWithClassName) {
           Get early access
         </h1>
         <p className="mt-4 max-w-[700px] text-5 text-black/70">
-          Sign up to receive{" "}
-          <WaveText
-            text="product launch updates"
-            amplitude={3}
-            duration={1.6}
-            delay={0.1}
-          />
-          , beta testing opportunities, and invitations to user interviews.
+          Join the waitlist for launch updates, beta access, and user
+          interviews.
         </p>
         <GlowButton className="mt-6" bg="#000">
           <ShimmerText

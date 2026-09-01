@@ -14,20 +14,21 @@ export function Steps(props: PropsWithClassName) {
         <div>
           <CallItUp />
           <div className={c}>
-            <div className={h}>01 — Call it up</div>
+            <div className={h}>1. Call it up</div>
             <p className={p}>
-              Press a keyboard shortcut to bring Unstash up instantly, right
-              when you need it.
+              Option + Space pops Unstash up right over your DAW. One input box.
+              Nothing more.
             </p>
           </div>
         </div>
         <div>
           <ListAnimation />
           <div className={c}>
-            <div className={h}>02 — Find your sound</div>
+            <div className={h}>2. Find your sound</div>
             <p className={p}>
-              Search your sample library and preview sounds without leaving your
-              creative flow.
+              Search with words, bpm ranges, key, and <code>or</code> / <code>not</code>
+              clauses. Audition everything with instant waveforms, without
+              leaving your flow.
             </p>
           </div>
         </div>
@@ -43,10 +44,9 @@ export function Steps(props: PropsWithClassName) {
             playsInline
           />
           <div className={c}>
-            <div className={h}>03 — Drag it into your DAW</div>
+            <div className={h}>3. Drag &amp; create</div>
             <p className={p}>
-              Found the right sample? Drag it straight into your DAW and keep
-              creating.
+              Drag the winner straight into your DAW and get back to the track.
             </p>
           </div>
         </div>

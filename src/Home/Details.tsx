@@ -2,8 +2,9 @@ import type { ReactNode } from "react";
 import { Centering } from "../components/Centering";
 import { WaveText } from "../components/WaveText";
 import type { PropsWithClassName } from "../types";
-import { GradientText } from "../components/GradientText";
 import { Search } from "../icons/Search";
+import { GradientText } from "../components/GradientText";
+import { ShimmerText } from "./demo/app/views/SearchInput";
 
 export function Details(props: PropsWithClassName) {
   return (
@@ -11,7 +12,7 @@ export function Details(props: PropsWithClassName) {
       <section className="mt-32 px-8">
         <div className="flex gap-8 items-start">
           <h1 className="text-8 leading-[1.2] text-fg1 font-bold">
-            You have hundreds of thousands of samples.
+            You own hundreds of thousands of samples.
             <br />
             So why do you keep using{" "}
             <WaveText text="the same ones?" duration={1.4} />
@@ -22,50 +23,73 @@ export function Details(props: PropsWithClassName) {
             <ProblemFeature
               renderTitle={() => (
                 <span>
-                  A{" "}
                   <span className="font-[Lemon]">
                     <GradientText gradient="linear-gradient(90deg, #fff7a8 0%, #fde047 45%, #facc15 75%, #bef264 100%)">
-                      fresh
+                      Fresh
                     </GradientText>
                   </span>{" "}
-                  result every time.
+                  results, every time.
                 </span>
               )}
               description={
                 <>
-                  Stop opening the same samples.
-                  <br />
-                  Unstash randomizes your results by default, so your library
-                  keeps surprising you.
+                  Unstash randomizes results by default, then lets you narrow
+                  with filters — so your library keeps surprising you.
                 </>
               }
             />
             <ProblemFeature
               renderTitle={() => (
                 <span>
-                  ⚡{" "}
-                  <span className="mr-3 font-[Rubik_Glitch] italic">SPEED</span>{" "}
+                  <span className="mr-3 font-[Rubik_Glitch] italic">
+                    <GradientText
+                      gradient="
+                        linear-gradient(
+                          110deg,
+                          #b7c7ff 0%,
+                          #e3e9ff 24%,
+                          #ffffff 42%,
+                          #8fa4ff 50%,
+                          #c7b9ff 64%,
+                          #f1efff 86%,
+                          #ffffff 100%
+                        )
+                      "
+                    >
+                      SPEED
+                    </GradientText>
+                  </span>{" "}
                   <span>by design</span>.
                 </span>
               )}
               description={
                 <>
-                  It worked very smoothly even with a large sample library like
-                  millions of samples.
+                  Even with hundreds of thousands of samples, Unstash keeps
+                  up—so your creative flow never misses a beat.
                 </>
               }
             />
           </div>
           <div className="">
             <ProblemFeature
-              renderTitle={() => <span>Powerful search engine</span>}
+              renderTitle={() => (
+                <span>
+                  One box. A real{" "}
+                  <ShimmerText baseColor="#ffffff99" highlightColor="#fffffff0">
+                    Search Engine.
+                  </ShimmerText>
+                </span>
+              )}
               description={
                 <>
-                  No fancy AI, just search doing its best. Unstash keeps the
-                  interface simple: one input box.
+                  No AI gimmicks—just sharp, flexible search.
                   <br />
-                  Underneath, though, there’s a surprisingly powerful search
-                  engine doing its best.
+                  Use Boolean operators like <code>or</code> and{" "}
+                  <code>not</code>, filter by key with <code>key:c#m</code>,
+                  find spelling variations such as <code>hihat</code>,{" "}
+                  <code>hats</code>, and
+                  <code>hi-hat</code>, and search numeric ranges like{" "}
+                  <code>hihat loop 120-130</code>.
                 </>
               }
             />
