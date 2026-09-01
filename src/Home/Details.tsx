@@ -22,7 +22,7 @@ export function Details(props: PropsWithClassName) {
             <ProblemFeature
               renderTitle={() => (
                 <span>
-                  🍋 A{" "}
+                  A{" "}
                   <span className="font-[Lemon]">
                     <GradientText gradient="linear-gradient(90deg, #fff7a8 0%, #fde047 45%, #facc15 75%, #bef264 100%)">
                       fresh
@@ -40,30 +40,6 @@ export function Details(props: PropsWithClassName) {
                 </>
               }
             />
-            <div className="h-[160px] rounded-[18px] bg-white-subtle" />
-          </div>
-          <div className="grid grid-cols-[1fr_1fr] gap-12">
-            <ProblemFeature
-              renderTitle={() => (
-                <span>
-                  🐣 No fancy AI, just search{" "}
-                  <span className="font-[Caveat] text-4xl! underline decoration-wavy decoration-amber-200/80 decoration-2 [text-decoration-skip-ink:none] ">
-                    doing its best.
-                  </span>
-                </span>
-              )}
-              description={
-                <>
-                  Unstash keeps the interface simple: one input box.
-                  <br />
-                  Underneath, though, there’s a surprisingly powerful search
-                  engine doing its best.
-                </>
-              }
-            />
-            <SearchExamples />
-          </div>
-          <div className="grid grid-cols-[1fr_1fr] gap-12">
             <ProblemFeature
               renderTitle={() => (
                 <span>
@@ -79,7 +55,21 @@ export function Details(props: PropsWithClassName) {
                 </>
               }
             />
-            <div className="h-[360px] rounded-[18px] bg-white-subtle" />
+          </div>
+          <div className="">
+            <ProblemFeature
+              renderTitle={() => <span>Powerful search engine</span>}
+              description={
+                <>
+                  No fancy AI, just search doing its best. Unstash keeps the
+                  interface simple: one input box.
+                  <br />
+                  Underneath, though, there’s a surprisingly powerful search
+                  engine doing its best.
+                </>
+              }
+            />
+            <SearchExamples />
           </div>
         </div>
       </section>
