@@ -1,4 +1,4 @@
-import { createRef, type RefObject, useEffect, useRef } from "react";
+import { type RefObject, useEffect, useRef } from "react";
 import clsx from "clsx";
 import { useSearchState } from "./state/search";
 import { playSample, stopPlayback, usePlaybackState } from "./state/player";
@@ -14,7 +14,7 @@ type Props = {
 };
 
 export function AppRoot(props: Props) {
-  const inputRef = createRef<HTMLInputElement | null>();
+  const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const {
@@ -65,7 +65,10 @@ export function AppRoot(props: Props) {
     runScenario();
   }, []);
 
-  const focusInput = () => inputRef.current?.focus();
+  const focusInput = () =>
+    inputRef.current?.focus({
+      preventScroll: true,
+    });
   const handleEscDown = () => {
     if (query === "") {
       // invoke("hide_window");

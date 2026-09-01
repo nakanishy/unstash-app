@@ -202,7 +202,6 @@ export function SearchInput({
           autoCorrect="off"
           autoCapitalize="off"
           spellCheck={false}
-          autoFocus
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
