@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { Centering } from "../components/Centering";
 import type { PropsWithClassName } from "../types";
 import CallItUp from "./animations/CallItUp";
+import ListAnimation from "./animations/ListAnimation";
 
 export function Steps(props: PropsWithClassName) {
   const h = clsx("text-6 text-fg1 font-bold");
@@ -21,7 +22,7 @@ export function Steps(props: PropsWithClassName) {
           </div>
         </div>
         <div>
-          <Placeholder />
+          <ListAnimation />
           <div className={c}>
             <div className={h}>02 — Find your sound</div>
             <p className={p}>
@@ -51,11 +52,5 @@ export function Steps(props: PropsWithClassName) {
         </div>
       </section>
     </Centering>
-  );
-}
-
-function Placeholder() {
-  return (
-    <div className="w-full max-w-[450px] aspect-[45/23] rounded-[20px] bg-white-subtle" />
   );
 }
