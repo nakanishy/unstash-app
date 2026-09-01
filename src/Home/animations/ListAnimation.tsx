@@ -125,15 +125,14 @@ export default function ListAnimation() {
     };
 
     const runAnimation = async () => {
-      // 初期位置
       selectAndPlay(1);
       await moveTo(1, 0);
-      await sleep(1000);
+      await sleep(3000);
 
       while (!cancelled) {
         selectAndPlay(2);
         await moveTo(2, 0.8);
-        await sleep(3000);
+        await sleep(2500);
 
         selectAndPlay(3);
         await moveTo(3, 0.8);
@@ -141,27 +140,17 @@ export default function ListAnimation() {
 
         selectAndPlay(4);
         await moveTo(4, 0.8);
-        await sleep(1200);
+        await sleep(2200);
 
-        /*
-         * index 1 と index 4 は同じ論理アイテム。
-         *
-         * index 4 の位置:
-         *   4 * (50 + 8)
-         *
-         * index 1 の位置:
-         *   1 * (50 + 8)
-         *
-         * その差分は original.length 分の周期なので、
-         * 表示内容は同じまま位置だけを瞬間的に戻せる。
-         */
+        selectAndPlay(5);
+        await moveTo(5, 0.8);
+        await sleep(3000);
+
+        // まず 6 (1と同じ内容)へ移動するアニメーション
+        await moveTo(6, 0.8);
+        await moveTo(1, 0);
         selectAndPlay(1);
-        await new Promise<void>((resolve) => {
-          requestAnimationFrame(() => {
-            elm.scrollTop = getScrollTopForIndex(1);
-            resolve();
-          });
-        });
+        await sleep(3000);
       }
     };
 
