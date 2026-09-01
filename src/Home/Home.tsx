@@ -10,8 +10,8 @@ export function Home() {
   return (
     <div className="w-full min-h-full h-auto text-fg1 bg-black">
       <Hero />
-      <Steps className="mt-0" />
       <Details />
+      <Steps className="mt-0" />
       <GetEarlyAccess className="mt-8" />
       <NotManager />
       <CreatorNote className="mt-18" />
