@@ -77,7 +77,7 @@ function Left() {
             baseColor="#000000"
             highlightColor="#ffffff"
           >
-            <span className="text-3">Join the waitlist</span>
+            <span className="text-3">Download for Free</span>
           </ShimmerText>
         </GlowButton>
       </div>

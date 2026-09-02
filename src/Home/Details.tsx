@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import { Centering } from "../components/Centering";
 import { WaveText } from "../components/WaveText";
 import type { PropsWithClassName } from "../types";
@@ -38,23 +38,25 @@ export function Details(props: PropsWithClassName) {
                 </>
               }
             />
+          </div>
+          <div className="grid grid-cols-[1fr_1fr] gap-12">
             <ProblemFeature
               renderTitle={() => (
                 <span>
                   <GradientText
                     className="px-3"
                     gradient="
-                      linear-gradient(
-                        115deg,
-                        #91caff 0%,
-                        #d9f1ff 30%,
-                        #ffffff 44%,
-                        #65b8ff 51%,
-                        #8d9dff 63%,
-                        #e0e7ff 84%,
-                        #ffffff 100%
-                      )
-                    "
+                    linear-gradient(
+                      115deg,
+                      #91caff 0%,
+                      #d9f1ff 30%,
+                      #ffffff 44%,
+                      #65b8ff 51%,
+                      #8d9dff 63%,
+                      #e0e7ff 84%,
+                      #ffffff 100%
+                    )
+                  "
                   >
                     <span className="font-[Rubik_Glitch] italic">SPEED</span>
                   </GradientText>{" "}
@@ -69,7 +71,7 @@ export function Details(props: PropsWithClassName) {
               }
             />
           </div>
-          <div className="">
+          <div className="grid grid-cols-[1fr_1fr] gap-12">
             <ProblemFeature
               renderTitle={() => (
                 <span>
@@ -88,12 +90,12 @@ export function Details(props: PropsWithClassName) {
                   No AI gimmicks—just sharp, flexible search.
                   <br />
                   <br />
-                  Use Boolean operators like <code>or</code> and{" "}
-                  <code>not</code>, filter by key with <code>key:c#m</code>,
-                  find spelling variations such as <code>hihat</code>,{" "}
-                  <code>hats</code>, and
-                  <code>hi-hat</code>, and search numeric ranges like{" "}
-                  <code>hihat loop 120-130</code>.
+                  Use Boolean operators like <Code>or</Code> and{" "}
+                  <Code>not</Code>, filter by key with <Code>key:c#m</Code>,
+                  find spelling variations such as <Code>hihat</Code>,{" "}
+                  <Code>hats</Code>, and
+                  <Code>hi-hat</Code>, and search numeric ranges like{" "}
+                  <Code>hihat loop 120-130</Code>.
                 </>
               }
             />
@@ -130,12 +132,12 @@ type Result = {
 function SearchExamples() {
   const results: Result[] = [
     {
-      query: "kick",
-      samples: ["kck.wav", "kick.wav"],
+      query: "hihat",
+      samples: ["hihat.wav", "hi-hat.wav", "hats.wav", "hh.wav"],
     },
     {
-      query: "hihat loop 120-130",
-      samples: ["hat_loop_125_BPM.wav"],
+      query: "clap or snare",
+      samples: ["clap.wav", "snap.wav", "snr.wav"],
     },
     {
       query: "hihat or top loop 120-130",
@@ -144,14 +146,14 @@ function SearchExamples() {
   ];
 
   return (
-    <div className="rounded-[6px] bg-white-very-subtle p-4">
+    <div className="flex flex-col gap-4 rounded-[6px] bg-white-very-subtle p-4">
       {results.map(({ query, samples }) => (
         <div className="" key={query}>
           <div className="flex items-center gap-2">
             <Search size={20} />
-            <span className="font-bold text-fg1 text-4">{query}</span>
+            <span className="font text-fg1 text-4">{query}</span>
           </div>
-          <div>
+          <div className="mt-2">
             {samples.map((sample, i) => (
               <div key={i} className="text-fg2">
                 {sample}
@@ -161,5 +163,13 @@ function SearchExamples() {
         </div>
       ))}
     </div>
+  );
+}
+
+function Code({ children }: PropsWithChildren) {
+  return (
+    <code className="px-2 py-1 bg-white-subtle font-mono text-2 rounded-[6px]">
+      {children}
+    </code>
   );
 }
