@@ -19,9 +19,9 @@ export function CreatorNote(props: PropsWithClassName) {
         <div className="mt-6 text-fg2">
           <p>
             I’ve been building software for many years, and began making music a
-            few years ago. As I searched through thousands of samples, I often
-            wished for a more flexible search — and a little more surprise.
-            That’s why I built Unstash.
+            few years ago. As I searched through hundreds of thousands of
+            samples, I often wished for a more flexible search — and a little
+            more surprise. That’s why I built Unstash.
           </p>
           <p className="mt-5">
             After countless experiments and redesigning the app from the ground

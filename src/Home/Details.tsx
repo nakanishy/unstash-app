@@ -3,7 +3,6 @@ import { Centering } from "../components/Centering";
 import { WaveText } from "../components/WaveText";
 import type { PropsWithClassName } from "../types";
 import { Search } from "../icons/Search";
-import { GradientText } from "../components/GradientText";
 import { ShimmerText } from "./demo/app/views/SearchInput";
 
 export function Details(props: PropsWithClassName) {
@@ -34,8 +33,6 @@ export function Details(props: PropsWithClassName) {
                 </>
               }
             />
-          </div>
-          <div className="grid grid-cols-[1fr_1fr] gap-12">
             <ProblemFeature
               renderTitle={() => (
                 <span>
@@ -132,7 +129,7 @@ function SearchExamples() {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-4 rounded-[6px] bg-white-very-subtle p-4">
+    <div className="grid grid-cols-2 gap-4 rounded-[12px] bg-white-very-subtle p-4">
       {results.map(({ query, samples }) => (
         <div key={query}>
           <div className="flex items-center gap-2">
