@@ -104,32 +104,36 @@ function Left() {
 function Right(props: PropsWithClassName) {
   const [mode, setMode] = useState("collapsed");
   return (
-    <motion.div
+    <div
       className={clsx(
-        "mt-0 transform rounded-[24px] border border-[#ffffff33] bg-black/40 xl:mt-[-20px]",
+        "relative h-[400px] w-full",
         props.className,
       )}
-      style={{
-        boxShadow: `0 6px 30px 6px rgba(255, 255, 255, 0.06)`,
-        backdropFilter: "blur(20px)",
-      }}
-      animate={{
-        width: mode === "expanded" ? "100%" : "380px",
-        height: mode === "expanded" ? 400 : 67,
-        y: [0, -4, 0],
-      }}
-      transition={{
-        width: { duration: 0.14 },
-        height: { duration: 0.14 },
-        y: {
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        },
-      }}
     >
-      <AppRoot onModeChange={setMode} />
-    </motion.div>
+      <motion.div
+        className="absolute left-1/2 top-0 max-w-full -translate-x-1/2 transform overflow-hidden rounded-[24px] border border-[#ffffff33] bg-black/40"
+        style={{
+          boxShadow: `0 6px 30px 6px rgba(255, 255, 255, 0.06)`,
+          backdropFilter: "blur(20px)",
+        }}
+        animate={{
+          width: mode === "expanded" ? "100%" : "380px",
+          height: mode === "expanded" ? 400 : 67,
+          y: [0, -4, 0],
+        }}
+        transition={{
+          width: { duration: 0.14 },
+          height: { duration: 0.14 },
+          y: {
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          },
+        }}
+      >
+        <AppRoot onModeChange={setMode} />
+      </motion.div>
+    </div>
   );
 }
 

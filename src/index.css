@@ -53,7 +53,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent;
+  background-color: #000;
 }
 
 ::-webkit-scrollbar-corner {
