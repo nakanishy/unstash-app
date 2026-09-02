@@ -108,11 +108,12 @@ function Right(props: PropsWithClassName) {
     <div
       className={clsx(
         "relative h-[400px] w-full",
+        "flex items-center justify-center",
         props.className,
       )}
     >
       <motion.div
-        className="absolute left-1/2 top-0 max-w-full -translate-x-1/2 transform overflow-hidden rounded-[24px] border border-[#ffffff33] bg-black/40"
+        className="max-w-full transform overflow-hidden rounded-[24px] border border-[#ffffff33] bg-black/40"
         style={{
           boxShadow: `0 6px 30px 6px rgba(255, 255, 255, 0.06)`,
           backdropFilter: "blur(20px)",
