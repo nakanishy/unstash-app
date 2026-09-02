@@ -8,17 +8,17 @@ import { ShimmerText } from "./demo/app/views/SearchInput";
 export function Details(props: PropsWithClassName) {
   return (
     <Centering className={props.className}>
-      <section className="mt-32 px-8">
+      <section className="mt-12 px-5 md:mt-16 lg:mt-32 lg:px-8">
         <div className="flex gap-8 items-start">
-          <h1 className="text-8 leading-[1.2] text-fg1 font-bold">
+          <h1 className="text-7 leading-[1.2] text-fg1 font-bold sm:text-8">
             You own hundreds of thousands of samples.
             <br />
             So why do you keep using{" "}
             <WaveText text="the same ones?" duration={1.4} />
           </h1>
         </div>
-        <div className="mt-14 flex flex-col gap-9">
-          <div className="grid grid-cols-[1fr_1fr] gap-12">
+        <div className="mt-8 flex flex-col gap-8 lg:mt-14 lg:gap-9">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 lg:gap-12">
             <ProblemFeature
               renderTitle={() => (
                 <span>
@@ -50,7 +50,7 @@ export function Details(props: PropsWithClassName) {
               }
             />
           </div>
-          <div className="grid grid-cols-[1fr_1fr] gap-12">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 lg:gap-12">
             <ProblemFeature
               renderTitle={() => (
                 <span>
@@ -95,8 +95,8 @@ function ProblemFeature({
 }) {
   return (
     <div className="">
-      <h2 className="text-7 text-fg1 font-bold">{renderTitle()}</h2>
-      <p className="mt-3 max-w-[500px] text-4 leading-[1.45] text-fg2">
+      <h2 className="text-6 text-fg1 font-bold sm:text-7">{renderTitle()}</h2>
+      <p className="mt-3 max-w-[500px] text-3 leading-[1.45] text-fg2 sm:text-4">
         {description}
       </p>
     </div>
@@ -129,17 +129,17 @@ function SearchExamples() {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-4 rounded-[12px] bg-white-very-subtle p-4">
+    <div className="grid grid-cols-1 gap-4 rounded-[12px] bg-white-very-subtle p-4 sm:grid-cols-2">
       {results.map(({ query, samples }) => (
-        <div key={query}>
+        <div key={query} className="min-w-0">
           <div className="flex items-center gap-2">
             <Search size={20} color="#ffffff88" />
-            <span className="font text-fg1 text-4">{query}</span>
+            <span className="min-w-0 break-words text-3 text-fg1 sm:text-4">{query}</span>
           </div>
 
           <div className="mt-2">
             {samples.map((sample, i) => (
-              <div key={i} className="text-fg2">
+              <div key={i} className="break-words text-fg2">
                 {sample}
               </div>
             ))}

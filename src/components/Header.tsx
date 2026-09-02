@@ -4,7 +4,7 @@ import { Centering } from "./Centering";
 export function Header(props: PropsWithClassName) {
   return (
     <Centering className={props.className}>
-      <header className="flex items-center justify-between px-8 h-[70px]">
+      <header className="flex h-[70px] items-center justify-between px-5 sm:px-8">
         <div className="flex items-center gap-4">
           <img
             className="block size-[24px]"

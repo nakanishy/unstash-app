@@ -47,9 +47,21 @@ export function Hero(props: PropsWithClassName) {
              "
       />
       <Centering className={clsx("relative z-0", props.className)}>
-        <section className={clsx("flex items-center px-8", "h-[700px]")}>
+        <section
+          className={clsx(
+            "flex min-h-[660px] flex-col justify-center gap-10 px-5 pb-10 pt-[100px]",
+            "sm:px-8 md:min-h-[700px] md:gap-12",
+            "xl:flex-row xl:items-center xl:gap-8 xl:py-0",
+          )}
+        >
           <Left />
-          <Right className="shrink-0 w-[580px]" />
+          <Right
+            className={clsx(
+              "max-w-[calc(100%_-_16px)] self-center",
+              "sm:max-w-[520px] md:max-w-[560px]",
+              "xl:self-auto xl:max-w-[580px]",
+            )}
+          />
         </section>
       </Centering>
     </div>
@@ -58,17 +70,17 @@ export function Hero(props: PropsWithClassName) {
 
 function Left() {
   return (
-    <div className="w-full md:w-[800px]">
-      <h1 className="text-[68px] leading-[1] text-fg1">
+    <div className="w-full min-w-0 xl:flex-1">
+      <h1 className="text-[40px] leading-[1.05] text-fg1 sm:text-[52px] md:text-[60px] xl:text-[68px]">
         Find the sound.
         <br />
         <div className="font-bold">Keep the flow.</div>
       </h1>
-      <p className="mt-5 text-5 text-fg2 font-normal">
+      <p className="mt-5 max-w-[700px] text-4 font-normal leading-[1.45] text-fg2 sm:text-5">
         A Spotlight-style launcher for your sample library.
         <br />
         Press Option + Space, type what you need, audition instantly, and drag
-        the right sound straight into your DAW.
+        <br className="hidden sm:block" /> the right sound straight into your DAW.
       </p>
       <div className="mt-6">
         <GlowButton bg="#ffffffdd">
@@ -94,7 +106,7 @@ function Right(props: PropsWithClassName) {
   return (
     <motion.div
       className={clsx(
-        "mt-[-20px] border border-[#ffffff33] rounded-[24px] bg-black/40 transform",
+        "mt-0 transform rounded-[24px] border border-[#ffffff33] bg-black/40 xl:mt-[-20px]",
         props.className,
       )}
       style={{
@@ -102,7 +114,7 @@ function Right(props: PropsWithClassName) {
         backdropFilter: "blur(20px)",
       }}
       animate={{
-        width: mode === "expanded" ? 580 : 380,
+        width: mode === "expanded" ? "100%" : "380px",
         height: mode === "expanded" ? 400 : 67,
         y: [0, -4, 0],
       }}

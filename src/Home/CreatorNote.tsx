@@ -5,15 +5,15 @@ export function CreatorNote(props: PropsWithClassName) {
   return (
     <section
       className={clsx(
-        "mb-12 max-w-[700px] mx-auto p-8",
-        "bg-white-subtle rounded-[12px]",
+        "mx-5 mb-12 max-w-[700px] p-5 sm:mx-auto sm:p-8",
+        "rounded-[12px] bg-white-subtle",
         props.className,
       )}
 
       style={{ fontFamily: "Cambay" }}
     >
       <div className="text-4 leading-[1.4]">
-        <div className="text-7 font-bold leading-[1.2]">
+        <div className="text-6 font-bold leading-[1.2] sm:text-7">
           Crafted in Japan 🇯🇵 with love and care.
         </div>
         <div className="mt-6 text-fg2">

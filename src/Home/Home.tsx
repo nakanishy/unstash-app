@@ -6,7 +6,7 @@ import { Steps } from "./Steps";
 
 export function Home() {
   return (
-    <div className="w-full min-h-full h-auto text-fg1 bg-black">
+    <div className="min-h-full w-full overflow-x-hidden bg-black text-fg1">
       <Hero />
       <Steps className="mt-0" />
       <Details />

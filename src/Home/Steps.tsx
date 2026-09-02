@@ -10,7 +10,7 @@ export function Steps(props: PropsWithClassName) {
   const c = clsx("mt-4");
   return (
     <Centering className={props.className}>
-      <section className="flex gap-8 px-8">
+      <section className="grid grid-cols-1 gap-8 px-5 sm:grid-cols-2 sm:px-8 lg:grid-cols-3">
         <div>
           <CallItUp />
           <div className={c}>

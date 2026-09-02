@@ -5,10 +5,10 @@ import type { PropsWithChildren } from "react";
 
 export function Footer(props: PropsWithClassName) {
   return (
-    <Centering className={clsx("px-8", props.className)}>
+    <Centering className={clsx("px-5 sm:px-8", props.className)}>
       <footer
         className={clsx(
-          "flex items-center h-[100px]",
+          "flex h-[88px] items-center sm:h-[100px]",
           "border-t border-white/40",
         )}
       >
