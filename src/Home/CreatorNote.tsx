@@ -16,14 +16,23 @@ export function CreatorNote(props: PropsWithClassName) {
         <div className="text-7 font-bold leading-[1.2]">
           Crafted in Japan 🇯🇵 with love and care.
         </div>
-        <div className="mt-6 max-w-[550px] text-fg2">
-          <div>
-            I built Unstash because I love music and I love software.
-          </div>
-          <div className="mt-4">
-            I hope it makes your creative process smoother — and surprises you
-            with sounds you forgot you had.
-          </div>
+        <div className="mt-6 text-fg2">
+          <p>
+            I’ve been building software for many years, and began making music a
+            few years ago. As I searched through thousands of samples, I often
+            wished for a more flexible search — and a little more surprise.
+            That’s why I built Unstash.
+          </p>
+          <p className="mt-5">
+            After countless experiments and redesigning the app from the ground
+            up about eight times, it has become what it is today. It’s still
+            evolving, but I hope it helps you spend less time searching and more
+            time making music, while discovering sounds that spark new ideas.
+          </p>
+          <p className="mt-5">
+            I hope Unstash becomes a small but meaningful part of your creative
+            process.
+          </p>
         </div>
         <a
           className="block mt-6"
