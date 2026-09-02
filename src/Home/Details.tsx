@@ -23,12 +23,8 @@ export function Details(props: PropsWithClassName) {
             <ProblemFeature
               renderTitle={() => (
                 <span>
-                  <span className="font-[Lemon]">
-                    <GradientText gradient="linear-gradient(90deg, #fff7a8 0%, #fde047 45%, #facc15 75%, #bef264 100%)">
-                      Fresh
-                    </GradientText>
-                  </span>{" "}
-                  results, every time.
+                  <span className="font-[Lemon]">Fresh</span> results, every
+                  time.
                 </span>
               )}
               description={
@@ -43,24 +39,10 @@ export function Details(props: PropsWithClassName) {
             <ProblemFeature
               renderTitle={() => (
                 <span>
-                  <GradientText
-                    className="px-3"
-                    gradient="
-                    linear-gradient(
-                      115deg,
-                      #91caff 0%,
-                      #d9f1ff 30%,
-                      #ffffff 44%,
-                      #65b8ff 51%,
-                      #8d9dff 63%,
-                      #e0e7ff 84%,
-                      #ffffff 100%
-                    )
-                  "
-                  >
-                    <span className="font-[Rubik_Glitch] italic">SPEED</span>
-                  </GradientText>{" "}
-                  <span>by design</span>.
+                  <span className="inline-block mr-3 font-[Rubik_Glitch] italic">
+                    SPEED
+                  </span>
+                  <span> by design</span>.
                 </span>
               )}
               description={
@@ -143,16 +125,21 @@ function SearchExamples() {
       query: "hihat or top loop 120-130",
       samples: ["Top Loop 130BPM (A#).wav", "hihat_loop_125BPM.wav"],
     },
+    {
+      query: "piano key:g#",
+      samples: ["piano (G#).wav", "piano_Abmaj.wav"],
+    },
   ];
 
   return (
-    <div className="flex flex-col gap-4 rounded-[6px] bg-white-very-subtle p-4">
+    <div className="grid grid-cols-2 gap-4 rounded-[6px] bg-white-very-subtle p-4">
       {results.map(({ query, samples }) => (
-        <div className="" key={query}>
+        <div key={query}>
           <div className="flex items-center gap-2">
-            <Search size={20} />
+            <Search size={20} color="#ffffff88" />
             <span className="font text-fg1 text-4">{query}</span>
           </div>
+
           <div className="mt-2">
             {samples.map((sample, i) => (
               <div key={i} className="text-fg2">
