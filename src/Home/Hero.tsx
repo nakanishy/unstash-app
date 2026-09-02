@@ -70,7 +70,7 @@ export function Hero(props: PropsWithClassName) {
 
 function Left() {
   return (
-    <div className="w-full min-w-0 xl:flex-1">
+    <div className="mx-auto w-full min-w-0 md:max-w-[1000px] xl:flex-1">
       <h1 className="text-[40px] leading-[1.05] text-fg1 sm:text-[52px] md:text-[60px] xl:text-[68px]">
         Find the sound.
         <br />
@@ -80,7 +80,8 @@ function Left() {
         A Spotlight-style launcher for your sample library.
         <br />
         Press Option + Space, type what you need, audition instantly, and drag
-        <br className="hidden sm:block" /> the right sound straight into your DAW.
+        <br className="hidden sm:block" /> the right sound straight into your
+        DAW.
       </p>
       <div className="mt-6">
         <GlowButton bg="#ffffffdd">
