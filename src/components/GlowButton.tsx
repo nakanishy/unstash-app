@@ -4,11 +4,12 @@ import {
   useEffect,
   useRef,
   useState,
+  type AnchorHTMLAttributes,
   type CSSProperties,
   type ReactNode,
 } from "react";
 
-type GlowButtonProps = {
+type GlowButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   children: ReactNode;
   bg: string;
   className?: string;
@@ -24,7 +25,7 @@ export function GlowButton({
   bg,
   ...props
 }: GlowButtonProps) {
-  const ref = useRef<HTMLButtonElement>(null);
+  const ref = useRef<HTMLAnchorElement>(null);
   const globalMousePos = useGlobalMousePos();
   const [angle, setAngle] = useState(0);
 
@@ -67,7 +68,7 @@ export function GlowButton({
   };
 
   return (
-    <motion.button
+    <motion.a
       ref={ref}
       type="button"
       className={clsx(
@@ -92,7 +93,7 @@ export function GlowButton({
       />
 
       <span className="relative z-10">{children}</span>
-    </motion.button>
+    </motion.a>
   );
 }
 

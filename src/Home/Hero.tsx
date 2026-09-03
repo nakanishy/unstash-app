@@ -69,6 +69,8 @@ export function Hero(props: PropsWithClassName) {
 }
 
 function Left() {
+  const version = "0.1.2";
+  const downloadLink = `https://github.com/nakanishy/unstash-releases/releases/download/v${version}/Unstash_${version}_universal.dmg`;
   return (
     <div className="mx-auto w-full min-w-0 md:max-w-[1000px] xl:flex-1">
       <div className="inline-flex items-center h-[30px] px-5 uppercase text-2 text-[#ffffffcc] rounded-full bg-white-subtle">
@@ -88,7 +90,7 @@ function Left() {
         drag the right sound straight into your DAW.
       </p>
       <div className="mt-6">
-        <GlowButton bg="#ffffffdd">
+        <GlowButton bg="#ffffffdd" href={downloadLink}>
           <div className="flex items-center gap-3">
             <img className="block ml-[-6px]" src="/images/apple.svg" />
             <ShimmerText
