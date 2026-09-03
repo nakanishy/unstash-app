@@ -26,9 +26,6 @@ export function CreatorNote(props: PropsWithClassName) {
           <p className="mt-5">
             After countless experiments and redesigning the app from the ground
             up around eight times, it has gradually become what it is today.
-            It’s still evolving, but I hope it helps you spend less time
-            searching and more time making music, while discovering sounds that
-            spark new ideas.
           </p>
           <p className="mt-5">
             I hope Unstash can become a small but meaningful part of your
