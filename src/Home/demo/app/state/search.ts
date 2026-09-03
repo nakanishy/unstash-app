@@ -76,10 +76,6 @@ type WaveformArgs = {
   width: number;
 };
 
-function wait(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 function seededSort<T>(items: T[], seed: number) {
   return [...items].sort((a, b) => {
     const valueA = hashValue(`${seed}:${String(a)}`);
