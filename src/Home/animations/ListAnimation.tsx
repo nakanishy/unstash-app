@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { animate, motion, type HTMLMotionProps } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Waveform } from "../demo/app/views/Waveform";
 import {
   clapLoop,
@@ -26,10 +26,8 @@ const waveDatas = [hihatLoop, drumLoop, drumLoop2, snareRoll, clapLoop];
 
 const items = Array(3).fill(original).flat();
 
-const containerHeight = 230;
 const itemHeight = 44;
 const gap = 8;
-const centerPadding = (containerHeight - itemHeight) / 2;
 const playbackDurationMs = 3000;
 const playbackTickMs = 50;
 
@@ -40,14 +38,42 @@ type PlaybackState = {
 };
 
 export default function ListAnimation() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const playbackTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [containerHeight, setContainerHeight] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(1);
   const [playbackState, setPlaybackState] = useState<PlaybackState>({
     status: "stopped",
     positionMs: 0,
     durationMs: 0,
   });
+  const centerPadding = Math.max(0, (containerHeight - itemHeight) / 2);
+  const maskFadeSize = Math.min(30, containerHeight / 2);
+
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+
+    if (container === null) {
+      return;
+    }
+
+    const updateHeight = () => {
+      const nextHeight = container.getBoundingClientRect().height;
+      setContainerHeight((currentHeight) =>
+        currentHeight === nextHeight ? currentHeight : nextHeight,
+      );
+    };
+
+    updateHeight();
+
+    const resizeObserver = new ResizeObserver(updateHeight);
+    resizeObserver.observe(container);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     const elm = scrollRef.current;
@@ -180,18 +206,18 @@ export default function ListAnimation() {
 
   return (
     <div
+      ref={containerRef}
       className={clsx(
         "w-full max-w-[450px] aspect-[45/23]",
         "rounded-[18px]",
         "bg-[#ffffff07]",
       )}
       style={{
-        height: containerHeight,
         maskImage: `linear-gradient(
           to bottom,
           rgb(0 0 0 / 0) 0px,
-          black 30px,
-          black calc(100% - 30px),
+          black ${maskFadeSize}px,
+          black calc(100% - ${maskFadeSize}px),
           rgb(0 0 0 / 0) 100%
         )`,
       }}
