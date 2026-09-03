@@ -21,6 +21,7 @@ type EventHandler<T> = (event: { payload: T }) => void;
 const playbackListeners = new Set<EventHandler<PlaybackState>>();
 let currentPlaybackState = initialPlaybackState;
 let playbackTimer: ReturnType<typeof setInterval> | undefined;
+const playbackSpeed = 7;
 
 /** Browser-only replacement for the audio worker bridge used by the desktop app. */
 export async function listen<T>(
@@ -77,7 +78,7 @@ export function playSample(path: string) {
   });
 
   playbackTimer = setInterval(() => {
-    const nextPosition = currentPlaybackState.positionMs + 50;
+    const nextPosition = currentPlaybackState.positionMs + 25 * playbackSpeed;
 
     if (nextPosition >= durationMs) {
       stopTimer();
@@ -94,7 +95,7 @@ export function playSample(path: string) {
       ...currentPlaybackState,
       positionMs: nextPosition,
     });
-  }, 50);
+  }, 25);
 }
 
 export function stopPlayback() {
