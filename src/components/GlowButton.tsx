@@ -4,15 +4,15 @@ import {
   useEffect,
   useRef,
   useState,
-  type AnchorHTMLAttributes,
   type CSSProperties,
   type ReactNode,
 } from "react";
 
-type GlowButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+type GlowButtonProps = {
   children: ReactNode;
   bg: string;
   className?: string;
+  href: string;
 };
 
 type GlowStyle = CSSProperties & {
@@ -84,7 +84,7 @@ export function GlowButton({
       whileHover={{
         scale: 1.07,
       }}
-      {...props}
+      href={props.href}
     >
       <span
         aria-hidden="true"
