@@ -12,7 +12,7 @@ import {
   kick_punchy,
 } from "./waveData";
 
-const LIMIT = 30;
+const LIMIT = 10;
 const waves = [
   hihatLoop,
   drumLoop,
