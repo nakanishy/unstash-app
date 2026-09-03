@@ -49,7 +49,6 @@ export default function ListAnimation() {
     durationMs: 0,
   });
   const centerPadding = Math.max(0, (containerHeight - itemHeight) / 2);
-  const maskFadeSize = Math.min(30, containerHeight / 2);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -127,7 +126,9 @@ export default function ListAnimation() {
     };
 
     const getScrollTopForIndex = (index: number) => {
-      return centerPadding + index * (itemHeight + gap) - centerPadding;
+      // The dynamic top padding centers each item, so only the row stride
+      // affects the scroll offset.
+      return index * (itemHeight + gap);
     };
 
     const moveTo = async (index: number, duration: number) => {
@@ -216,8 +217,8 @@ export default function ListAnimation() {
         maskImage: `linear-gradient(
           to bottom,
           rgb(0 0 0 / 0) 0px,
-          black ${maskFadeSize}px,
-          black calc(100% - ${maskFadeSize}px),
+          black 13%,
+          black 87%,
           rgb(0 0 0 / 0) 100%
         )`,
       }}
