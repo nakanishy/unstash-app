@@ -83,7 +83,7 @@ function Left() {
         <div className="font-bold">Keep the flow.</div>
       </h1>
       <p className="mt-5 max-w-[700px] text-4 font-normal leading-[1.45] text-fg2 sm:text-5">
-        A Spotlight-like launcher for your sample library.
+        A Spotlight-style launcher for your sample library.
         <br />
         Press Ctrl+Space, type what you need, preview instantly,
         <br className="hidden sm:block" />
