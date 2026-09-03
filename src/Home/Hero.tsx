@@ -79,7 +79,7 @@ function Left() {
       <p className="mt-5 max-w-[700px] text-4 font-normal leading-[1.45] text-fg2 sm:text-5">
         A Spotlight-style launcher for your sample library.
         <br />
-        Press Option + Space, type what you need, audition instantly, and drag
+        Press Ctrl + Space, type what you need, audition instantly, and drag
         <br className="hidden sm:block" /> the right sound straight into your
         DAW.
       </p>

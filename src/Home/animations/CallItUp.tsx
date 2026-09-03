@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion, useAnimate } from "motion/react";
 import { Search } from "../../icons/Search";
 
-const shortcutKeys = ["⌘", "⌥", "F"];
+const shortcutKeys = ["⌃", "Space"];
 const searchText = "hihat loop";
 
 const DESIGN_WIDTH = 450;
@@ -54,7 +54,6 @@ export default function CallItUp() {
           y: 0,
         });
 
-        // ⌘ → ⌥ → F の順に表示
         for (let index = 0; index < shortcutKeys.length; index += 1) {
           if (cancelled) return;
 
@@ -71,7 +70,7 @@ export default function CallItUp() {
             },
           );
 
-          await sleep(index === 1 ? 700 : 130);
+          await sleep(index === 0 ? 700 : 130);
         }
 
         await sleep(150);
@@ -211,7 +210,7 @@ export default function CallItUp() {
                 key={key}
                 id={`shortcut-key-${index}`}
                 className="
-                key grid size-12 place-items-center
+                key grid h-12 min-w-12 px-6 place-items-center
                 rounded-[13px]
                 bg-white/10
                 text-[21px]
