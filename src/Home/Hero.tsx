@@ -85,13 +85,17 @@ function Left() {
       </p>
       <div className="mt-6">
         <GlowButton bg="#ffffffdd">
-          <ShimmerText
-            duration={1.5}
-            baseColor="#000000"
-            highlightColor="#ffffff"
-          >
-            <span className="text-3">Download for Free</span>
-          </ShimmerText>
+          <div className="flex items-center gap-3">
+            <img className="block ml-[-6px]" src="/images/apple.svg" />
+            <ShimmerText
+              className="mt-[-2px]"
+              duration={1.5}
+              baseColor="#000000"
+              highlightColor="#ffffff"
+            >
+              <span className="text-3">Download for Free</span>
+            </ShimmerText>
+          </div>
         </GlowButton>
       </div>
       <div className="mt-3 text-3 text-fg2">In Development</div>
