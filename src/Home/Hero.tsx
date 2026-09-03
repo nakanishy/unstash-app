@@ -71,17 +71,21 @@ export function Hero(props: PropsWithClassName) {
 function Left() {
   return (
     <div className="mx-auto w-full min-w-0 md:max-w-[1000px] xl:flex-1">
-      <h1 className="text-[40px] leading-[1.05] text-fg1 sm:text-[52px] md:text-[60px] xl:text-[68px]">
+      <div className="inline-flex items-center h-[30px] px-5 uppercase text-2 text-[#ffffffcc] rounded-full bg-white-subtle">
+        <div className="mr-3 size-[8px] rounded-full bg-green-500 shadow-[0_0_6px_2px_rgba(34,197,94,0.45)]" />
+        Beta
+      </div>
+      <h1 className="mt-4 text-[40px] leading-[1.05] text-fg1 sm:text-[52px] md:text-[60px] xl:text-[68px]">
         Find the sound.
         <br />
         <div className="font-bold">Keep the flow.</div>
       </h1>
       <p className="mt-5 max-w-[700px] text-4 font-normal leading-[1.45] text-fg2 sm:text-5">
-        A Spotlight-style launcher for your sample library.
+        A Spotlight-like launcher for your sample library.
         <br />
-        Press Ctrl + Space, type what you need, audition instantly, and drag
-        <br className="hidden sm:block" /> the right sound straight into your
-        DAW.
+        Press Ctrl + Space, type what you need, audition instantly, and{" "}
+        <br className="hidden sm:block" />
+        drag the right sound straight into your DAW.
       </p>
       <div className="mt-6">
         <GlowButton bg="#ffffffdd">
@@ -98,10 +102,10 @@ function Left() {
           </div>
         </GlowButton>
       </div>
-      <div className="mt-3 text-3 text-fg2">In Development</div>
-      {/*<div className="mt-4 text-2 text-fg2">
-        One-time purchase · No subscription · 30 days free trial.
-      </div>*/}
+      {/*<div className="mt-3 text-3 text-fg2">In Development</div>*/}
+      <div className="mt-4 text-2 text-fg3">
+        macOS 13+ · Intel / Apple Silicon
+      </div>
     </div>
   );
 }
