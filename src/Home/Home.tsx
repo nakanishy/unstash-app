@@ -10,7 +10,6 @@ export function Home() {
       <Hero />
       <Steps className="mt-0" />
       <Details />
-      {/*<GetEarlyAccess className="mt-40" />*/}
       <CreatorNote className="mt-20" />
       <Footer className="mt-20" />
     </div>
