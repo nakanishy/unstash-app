@@ -1,29 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { type Sample } from "../../core/Sample";
-import {
-  drumLoop,
-  hihatLoop,
-  drumLoop2,
-  kick1,
-  kick_electro,
-  kick_fear,
-  kick_hard,
-  kick_house,
-  kick_punchy,
-} from "./waveData";
+import { kickWaves } from "./kickData";
 
 const LIMIT = 10;
-const waves = [
-  hihatLoop,
-  drumLoop,
-  drumLoop2,
-  kick1,
-  kick_electro,
-  kick_fear,
-  kick_hard,
-  kick_house,
-  kick_punchy,
-];
+const waves = kickWaves;
 
 const MOCK_SAMPLE_NAMES = [
   "NVL_Big_Kick_02_F.wav",
