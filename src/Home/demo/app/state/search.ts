@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { type Sample } from "../../core/Sample";
 import { kickWaves } from "./kickData";
+import {
+  type MockSample,
+  searchMockSamples,
+} from "./searchEngine";
 
 const LIMIT = 10;
 const waves = kickWaves;
@@ -58,6 +62,21 @@ const MOCK_SAMPLE_NAMES = [
   "simple_kick.wav",
 ];
 
+const MOCK_SAMPLES: MockSample[] = [
+  ...MOCK_SAMPLE_NAMES.map((name) => ({ name })),
+  { name: "hihat_loop_120_C#.wav", key: "C#m" },
+  { name: "hats_loop_124_Db.wav", key: "Dbm" },
+  { name: "hi-hat_loop_130_C#m.wav", key: "C#m" },
+  { name: "hh_loop_128_Db.wav", key: "Dbm" },
+  { name: "hihat_loop_140_F#.wav", key: "F#m" },
+  { name: "snare_clean_01.wav" },
+  { name: "snap_clean_02.wav" },
+  { name: "clap_clean_03.wav" },
+  { name: "snappy_snare_04.wav" },
+  { name: "kick_808_120_C#.wav", key: "C#m" },
+  { name: "kick_808_150_Db.wav", key: "Dbm" },
+];
+
 type SearchArgs = {
   query: string;
   page: number;
@@ -70,10 +89,10 @@ type WaveformArgs = {
   width: number;
 };
 
-function seededSort<T>(items: T[], seed: number) {
+function seededSort<T>(items: T[], seed: number, getKey: (item: T) => string) {
   return [...items].sort((a, b) => {
-    const valueA = hashValue(`${seed}:${String(a)}`);
-    const valueB = hashValue(`${seed}:${String(b)}`);
+    const valueA = hashValue(`${seed}:${getKey(a)}`);
+    const valueB = hashValue(`${seed}:${getKey(b)}`);
     return valueA - valueB;
   });
 }
@@ -92,19 +111,16 @@ function hashValue(value: string) {
 async function invoke<T>(command: string, args: SearchArgs | WaveformArgs) {
   if (command === "search") {
     const { query, page, limit, seed } = args as SearchArgs;
-    const normalizedQuery = query.trim().toLowerCase();
-    const matches = MOCK_SAMPLE_NAMES.filter((name) =>
-      name.toLowerCase().includes(normalizedQuery),
-    );
-    const results = seededSort(matches, seed).slice(
+    const matches = searchMockSamples(MOCK_SAMPLES, query);
+    const results = seededSort(matches, seed, (sample) => sample.name).slice(
       page * limit,
       (page + 1) * limit,
     );
 
     return {
       total: matches.length,
-      results: results.map((name) => ({
-        path: `/Demo Samples/${name}`,
+      results: results.map((sample) => ({
+        path: `/Demo Samples/${sample.name}`,
       })),
     } as T;
   }
@@ -168,7 +184,7 @@ function useSampleSearch(
   useEffect(() => {
     const currentRequestId = ++requestId.current;
 
-    if (!query) {
+    if (!query.trim()) {
       setSamples([]);
       setTotal(null);
       return;
