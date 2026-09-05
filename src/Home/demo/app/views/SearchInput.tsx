@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { motion, useAnimate } from "motion/react";
+import { motion } from "motion/react";
 import { type ReactNode, type RefObject, useRef } from "react";
 import { Pressable } from "../../ui/components/Pressable";
 import { useAnimationFrame } from "../../ui/hooks/useAnimationFrame";
@@ -16,52 +16,10 @@ type Props = {
   onEscDown: () => void;
 };
 
-export function SearchInput({
-  ref,
-  value,
-  className,
-  onChange,
-  onClear,
-  onEnterDown,
-  onEscDown,
-}: Props) {
+export function SearchInput({ ref, value, className }: Props) {
   const dummyInputRef = useRef<HTMLDivElement>(null);
   const inputContainerRef = useRef<HTMLDivElement>(null);
   const dragRegionRef = useRef<HTMLDivElement>(null);
-  const [scope, animate] = useAnimate();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.currentTarget.value);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") onEnterDown();
-    if (e.key === "Escape") onEscDown();
-    if (e.key === "Backspace") {
-      if (value === "") shake(2);
-    }
-  };
-
-  const shake = (shakeAmount = 3, duration = 0.3) => {
-    const x = [
-      0,
-      -shakeAmount,
-      shakeAmount,
-      -shakeAmount * 0.75,
-      shakeAmount * 0.75,
-      -shakeAmount * 0.4,
-      shakeAmount * 0.4,
-      0,
-    ];
-    animate(
-      scope.current,
-      { x },
-      {
-        duration,
-        ease: "easeInOut",
-      },
-    );
-  };
 
   // Synchronize scrollLeft of the dummy with the actual one.
   useAnimationFrame(true, () => {
@@ -110,12 +68,6 @@ export function SearchInput({
     "w-max min-w-0 h-[40px]",
     "text-fg1 overflow-visible select-none pointer-events-none",
   );
-  const inputClassName = clsx(
-    "absolute top-[12px] left-0",
-    "w-full h-[26px]",
-    "text-transparent caret-[#ccc]",
-    "appearance-none overflow-auto outline-none",
-  );
   const placeholderClassName = clsx(
     "absolute top-[4px] left-0",
     "inline-block h-full text-[28px] text-fg3 origin-center",
@@ -146,7 +98,6 @@ export function SearchInput({
 
   return (
     <motion.div
-      ref={scope}
       className={clsx(containerClassName, className)}
       data-tauri-drag-region={true}
     >
@@ -186,25 +137,6 @@ export function SearchInput({
         >
           {value}
         </div>
-        <input
-          ref={(node) => {
-            ref.current = node;
-            return () => {
-              ref.current = null;
-            };
-          }}
-          className={clsx(commonClassName, inputClassName)}
-          readOnly={true}
-          type="text"
-          value={value}
-          placeholder=""
-          autoComplete="off"
-          autoCorrect="off"
-          autoCapitalize="off"
-          spellCheck={false}
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
-        />
         <div
           ref={dragRegionRef}
           className={clsx(
@@ -217,7 +149,7 @@ export function SearchInput({
       {!isQueryEmpty && (
         <Pressable
           className={clearButtonClassName}
-          onClick={onClear}
+          onClick={() => {}}
           padding={4}
         >
           <CloseButton />
