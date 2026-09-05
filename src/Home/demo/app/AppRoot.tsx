@@ -8,8 +8,10 @@ import { SearchInput } from "./views/SearchInput";
 import { Toolbar } from "./views/Toolbar";
 import { clipHeight } from "./styles/variables";
 import { SampleList } from "./views/SampleList/SampleList";
+import { useScenario, type Scenario } from "./useScenario";
 
 type Props = {
+  scenario: Scenario;
   onModeChange: (mode: string) => void;
 };
 
@@ -36,34 +38,7 @@ export function AppRoot(props: Props) {
   useStopPlaybackOnQueryChange(query);
   useResetScrollOnQueryChange(query, scrollRef);
 
-  useEffect(() => {
-    const runScenario = async () => {
-      await wait(1000);
-      changeQuery("k");
-      await wait(700);
-      changeQuery("ki");
-      await wait(800);
-      changeQuery("kic");
-      await wait(900);
-      changeQuery("kick");
-      await wait(1900);
-
-      setSelectedIndex(0);
-      playSample("");
-      await wait(2800);
-      setSelectedIndex(1);
-      playSample("");
-      await wait(3800);
-      setSelectedIndex(2);
-      playSample("");
-      await wait(4000);
-
-      changeQuery("");
-      await wait(3000);
-      await runScenario();
-    };
-    runScenario();
-  }, []);
+  useScenario(props.scenario, changeQuery, setSelectedIndex, playSample);
 
   const focusInput = () =>
     inputRef.current?.focus({
@@ -158,10 +133,4 @@ function useResetScrollOnQueryChange(
       scrollRef.current.scrollTop = 0;
     }
   }, [query]);
-}
-
-function wait(ms: number): Promise<void> {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
 }

@@ -143,7 +143,7 @@ function Right(props: PropsWithClassName) {
           },
         }}
       >
-        <AppRoot onModeChange={setMode} />
+        <AppRoot scenario="or" onModeChange={setMode} />
       </motion.div>
     </div>
   );
