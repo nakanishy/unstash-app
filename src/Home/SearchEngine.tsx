@@ -50,7 +50,12 @@ const scenarioList: {
   },
 ];
 const AUTO_ADVANCE_DELAY = 10000;
-const CLICK_ADVANCE_DELAY = 15000;
+const CLICK_ADVANCE_DELAY = 12000;
+const SCENARIO_LOADER_SIZE = 14;
+const SCENARIO_LOADER_BORDER_WIDTH = 2;
+const SCENARIO_LOADER_CENTER = SCENARIO_LOADER_SIZE / 2;
+const SCENARIO_LOADER_RADIUS =
+  SCENARIO_LOADER_CENTER - SCENARIO_LOADER_BORDER_WIDTH / 2;
 
 export function SearchEngine(props: PropsWithClassName) {
   const [scenario, setScenario] = useState<Scenario>("fuzzy");
@@ -112,7 +117,44 @@ export function SearchEngine(props: PropsWithClassName) {
                   setTimerRevision((revision) => revision + 1);
                 }}
               >
-                <div className="text-4">{item.label}</div>
+                <div className="flex items-center gap-2 text-4">
+                  {item.label}
+                  {item.scenario === scenario && (
+                    <motion.svg
+                      key={`${item.scenario}-${timerRevision}`}
+                      aria-hidden="true"
+                      className="shrink-0 ml-2 mt-[-1px]"
+                      width={SCENARIO_LOADER_SIZE}
+                      height={SCENARIO_LOADER_SIZE}
+                      viewBox={`0 0 ${SCENARIO_LOADER_SIZE} ${SCENARIO_LOADER_SIZE}`}
+                    >
+                      <circle
+                        cx={SCENARIO_LOADER_CENTER}
+                        cy={SCENARIO_LOADER_CENTER}
+                        r={SCENARIO_LOADER_RADIUS}
+                        fill="none"
+                        stroke="#ffffff33"
+                        strokeWidth={SCENARIO_LOADER_BORDER_WIDTH}
+                      />
+                      <motion.circle
+                        cx={SCENARIO_LOADER_CENTER}
+                        cy={SCENARIO_LOADER_CENTER}
+                        r={SCENARIO_LOADER_RADIUS}
+                        fill="none"
+                        stroke="#ffffffc0"
+                        strokeWidth={SCENARIO_LOADER_BORDER_WIDTH}
+                        pathLength={1}
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{
+                          duration: scenarioDelay / 1000,
+                          ease: "linear",
+                        }}
+                        transform={`rotate(-90 ${SCENARIO_LOADER_CENTER} ${SCENARIO_LOADER_CENTER})`}
+                      />
+                    </motion.svg>
+                  )}
+                </div>
                 <motion.div
                   className="text-2 text-fg2"
                   animate={{
