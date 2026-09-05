@@ -64,25 +64,21 @@ export function SearchEngine(props: PropsWithClassName) {
             <Heading>NOT</Heading>
             <Description>Remove unwanted results from your search.</Description>
             <SearchResultList
-              query="snap or clap"
+              query="snare not snappy"
               items={[
                 {
-                  value: "eby_snap_02.wav",
+                  value: "snare.wav",
                   matches: [
                     {
-                      start: 4,
-                      end: 8,
+                      start: 0,
+                      end: 5,
                     },
                   ],
                 },
                 {
-                  value: "TINY CLAP on the HELL.wav",
-                  matches: [
-                    {
-                      start: 5,
-                      end: 9,
-                    },
-                  ],
+                  value: "snare snappy.wav",
+                  disabled: true,
+                  matches: [],
                 },
               ]}
             />
@@ -120,6 +116,7 @@ type MatchRange = {
 type SearchItem = {
   value: string;
   matches: MatchRange[];
+  disabled?: boolean;
 };
 
 type SearchResultListProps = {
@@ -155,6 +152,7 @@ function HighlightedText({
 }: {
   value: string;
   matches: MatchRange[];
+  disabled?: boolean;
 }) {
   const ranges = mergeRanges(value, matches);
   const result: ReactNode[] = [];
@@ -170,12 +168,7 @@ function HighlightedText({
     result.push(
       <mark
         key={`match-${index}`}
-        className="
-          rounded-sm
-          bg-yellow-300/25
-          px-0.5
-          text-yellow-100
-        "
+        className={`bg-[#FFF25D]/40 px-0.5 text-white/90`}
       >
         {value.slice(range.start, range.end)}
       </mark>,
@@ -211,15 +204,16 @@ export function SearchResultList({ query, items }: SearchResultListProps) {
           <span>{query}</span>
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2">
           {items.map((item, index) => (
             <div
               key={`${item.value}-${index}`}
-              className="
+              aria-disabled={item.disabled || undefined}
+              className={`
                 text-2
                 leading-6
-                text-fg2
-              "
+                ${item.disabled ? "text-fg3" : "text-fg2"}
+              `}
             >
               <HighlightedText value={item.value} matches={item.matches} />
             </div>
