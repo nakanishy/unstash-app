@@ -117,7 +117,7 @@ export function SampleItem({
         animate={{
           scale: selected ? 1 + currentValue * 0.02 : 1,
           boxShadow: selected
-            ? `0 0 ${currentValue * 12}px ${currentValue * 12}px rgba(255, 255, 255, ${currentValue * 0.06})`
+            ? `0 0 ${currentValue * 10}px ${currentValue * 12}px rgba(255, 255, 255, ${currentValue * 0.02})`
             : "none",
         }}
         transition={{
