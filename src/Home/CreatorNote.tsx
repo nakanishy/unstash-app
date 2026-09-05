@@ -6,7 +6,7 @@ export function CreatorNote(props: PropsWithClassName) {
     <section
       className={clsx(
         "mx-5 mb-12 max-w-[700px] p-5 sm:mx-auto sm:p-8",
-        "rounded-[12px] bg-white-subtle",
+        "rounded-[12px] bg-white-very-subtle",
         props.className,
       )}
 
