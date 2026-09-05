@@ -4,6 +4,8 @@ import { ShimmerText } from "../components/ShimmerText";
 import type { PropsWithClassName } from "../types";
 import { AppRoot } from "./demo/app/AppRoot";
 import type { Scenario } from "./demo/app/useScenario";
+import clsx from "clsx";
+import { motion } from "motion/react";
 
 const scenarioList: {
   label: string;
@@ -58,18 +60,31 @@ export function SearchEngine(props: PropsWithClassName) {
           No AI gimmicks—just sharp, flexible search.
         </p>
 
-        <div className="grid grid-cols-2">
+        <div className="mt-7 grid grid-cols-2 gap-8">
           <div>
             {scenarioList.map((item, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="cursor-pointer"
+                className={clsx(
+                  "flex items-center",
+                  "cursor-pointer",
+                  "px-5",
+                  "h-[50px] rounded-[12px]",
+                  item.scenario === scenario ? "!text-fg1" : "text-fg2",
+                  item.scenario === scenario
+                    ? "!bg-white-very-subtle"
+                    : "bg-transparent",
+                )}
+                whileHover={{
+                  color: "#ffffffb0",
+                  backgroundColor: "#ffffff09",
+                }}
                 onClick={() => {
                   setScenario(item.scenario);
                 }}
               >
-                {item.label}
-              </div>
+                <div className="text-4">{item.label}</div>
+              </motion.div>
             ))}
           </div>
           <div
