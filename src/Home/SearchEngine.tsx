@@ -10,34 +10,43 @@ import { motion } from "motion/react";
 const scenarioList: {
   label: string;
   scenario: Scenario;
+  description: string;
 }[] = [
   {
     label: "Fuzzy Search",
     scenario: "fuzzy",
+    description: "Find relavant result",
   },
   {
     label: "Or Search",
     scenario: "or",
+
+    description: "Find relavant result",
   },
   {
     label: "Exclude term",
     scenario: "not",
+    description: "Find relavant result",
   },
   {
     label: "Exact match",
     scenario: "exact",
+    description: "Find relavant result",
   },
   {
     label: "Numeric Range",
     scenario: "range",
+    description: "Find relavant result",
   },
   {
     label: "Key Filter",
     scenario: "key",
+    description: "Find relavant result",
   },
   {
     label: "Smart Alias",
     scenario: "alias",
+    description: "Find relavant result",
   },
 ];
 const AUTO_ADVANCE_DELAY = 10000;
@@ -85,10 +94,9 @@ export function SearchEngine(props: PropsWithClassName) {
               <motion.div
                 key={i}
                 className={clsx(
-                  "flex items-center",
                   "cursor-pointer",
-                  "px-5",
-                  "h-[50px] rounded-[12px]",
+                  "px-5 py-4",
+                  "rounded-[12px]",
                   item.scenario === scenario ? "!text-fg1" : "text-fg2",
                   item.scenario === scenario
                     ? "!bg-white-very-subtle"
@@ -105,6 +113,17 @@ export function SearchEngine(props: PropsWithClassName) {
                 }}
               >
                 <div className="text-4">{item.label}</div>
+                <motion.div
+                  className="text-2 text-fg2"
+                  animate={{
+                    backdropFilter:
+                      item.scenario === scenario ? "blur(4px)" : "blur(0px)",
+                    opacity: item.scenario === scenario ? 1 : 0,
+                    height: item.scenario === scenario ? "auto" : 0,
+                  }}
+                >
+                  {item.description}
+                </motion.div>
               </motion.div>
             ))}
           </div>
