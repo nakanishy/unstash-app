@@ -121,7 +121,7 @@ async function runExactScenario(
   actions: ScenarioActions,
   signal: AbortSignal,
 ): Promise<boolean> {
-  return runTypedQueryScenario(actions, signal, "808 kick");
+  return runTypedQueryScenario(actions, signal, `"808_kick"`);
 }
 
 async function runRangeScenario(

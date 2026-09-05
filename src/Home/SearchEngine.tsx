@@ -13,40 +13,39 @@ const scenarioList: {
   description: string;
 }[] = [
   {
-    label: "Fuzzy Search",
+    label: "Partial Match",
     scenario: "fuzzy",
-    description: "Find relavant result",
+    description: "Match partial words as you type",
   },
   {
     label: "Or Search",
     scenario: "or",
-
-    description: "Find relavant result",
+    description: "Find samples matching any of the terms",
   },
   {
-    label: "Exclude term",
+    label: "Exclude Terms",
     scenario: "not",
-    description: "Find relavant result",
+    description: "Leave unwanted terms out",
   },
   {
-    label: "Exact match",
+    label: "Exact Match",
     scenario: "exact",
-    description: "Find relavant result",
+    description: "Match an exact phrase",
   },
   {
-    label: "Numeric Range",
+    label: "Number Range",
     scenario: "range",
-    description: "Find relavant result",
+    description: "Search within a number range",
   },
   {
     label: "Key Filter",
     scenario: "key",
-    description: "Find relavant result",
+    description: "Filter by musical key",
   },
   {
-    label: "Smart Alias",
+    label: "Smart Aliases",
     scenario: "alias",
-    description: "Find relavant result",
+    description: "Match related names automatically",
   },
 ];
 const AUTO_ADVANCE_DELAY = 10000;
