@@ -1,4 +1,4 @@
-import { useState, type PropsWithChildren } from "react";
+import { useEffect, useState } from "react";
 import { Centering } from "../components/Centering";
 import { ShimmerText } from "../components/ShimmerText";
 import type { PropsWithClassName } from "../types";
@@ -40,9 +40,28 @@ const scenarioList: {
     scenario: "alias",
   },
 ];
+const AUTO_ADVANCE_DELAY = 10000;
+const CLICK_ADVANCE_DELAY = 15000;
 
 export function SearchEngine(props: PropsWithClassName) {
   const [scenario, setScenario] = useState<Scenario>("fuzzy");
+  const [scenarioDelay, setScenarioDelay] = useState(AUTO_ADVANCE_DELAY);
+  const [timerRevision, setTimerRevision] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const currentIndex = scenarioList.findIndex(
+        (item) => item.scenario === scenario,
+      );
+      const nextIndex = (currentIndex + 1) % scenarioList.length;
+
+      setScenario(scenarioList[nextIndex].scenario);
+      setScenarioDelay(AUTO_ADVANCE_DELAY);
+    }, scenarioDelay);
+
+    return () => clearTimeout(timer);
+  }, [scenario, scenarioDelay, timerRevision]);
+
   return (
     <Centering className={props.className}>
       <section className="mt-12 px-5 md:mt-16 lg:mt-32 lg:px-8">
@@ -81,6 +100,8 @@ export function SearchEngine(props: PropsWithClassName) {
                 }}
                 onClick={() => {
                   setScenario(item.scenario);
+                  setScenarioDelay(CLICK_ADVANCE_DELAY);
+                  setTimerRevision((revision) => revision + 1);
                 }}
               >
                 <div className="text-4">{item.label}</div>
@@ -101,8 +122,4 @@ export function SearchEngine(props: PropsWithClassName) {
       </section>
     </Centering>
   );
-}
-
-function Heading(props: PropsWithChildren) {
-  return <h2 className="font-bold text-fg1 text-5">{props.children}</h2>;
 }

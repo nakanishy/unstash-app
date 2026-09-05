@@ -158,7 +158,7 @@ async function runTypedQueryScenario(
     if (!(await wait(TYPE_DURATION, signal))) return false;
   }
 
-  return wait(10000, signal);
+  return wait(16000, signal);
 }
 
 function wait(ms: number, signal: AbortSignal): Promise<boolean> {
