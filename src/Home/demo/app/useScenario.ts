@@ -1,6 +1,7 @@
 import { useEffect, useEffectEvent } from "react";
 
-export type Scenario = "kick" | "fuzzy" | "or";
+export type Scenario =
+  "hero" | "fuzzy" | "or" | "not" | "exact" | "range" | "key" | "alias";
 
 type ScenarioActions = {
   changeQuery: (query: string) => void;
@@ -55,12 +56,19 @@ export function useScenario(
 }
 
 const scenarioRunners: Record<Scenario, ScenarioRunner> = {
-  kick: runKickScenario,
+  hero: runHeroScenario,
   fuzzy: runFuzzyScenario,
   or: runOrScenario,
+  not: runNotScenario,
+  exact: runExactScenario,
+  range: runRangeScenario,
+  key: runKeyScenario,
+  alias: runAliasScenario,
 };
 
-async function runKickScenario(
+const TYPE_DURATION = 100;
+
+async function runHeroScenario(
   actions: ScenarioActions,
   signal: AbortSignal,
 ): Promise<boolean> {
@@ -92,50 +100,65 @@ async function runFuzzyScenario(
   actions: ScenarioActions,
   signal: AbortSignal,
 ): Promise<boolean> {
-  if (!(await wait(1000, signal))) return false;
-  actions.changeQuery("k");
-  if (!(await wait(700, signal))) return false;
-  actions.changeQuery("ki");
-  if (!(await wait(1900, signal))) return false;
-
-  actions.setSelectedIndex(0);
-  actions.playSample("");
-  if (!(await wait(2800, signal))) return false;
-  actions.setSelectedIndex(1);
-  actions.playSample("");
-  if (!(await wait(3800, signal))) return false;
-
-  actions.changeQuery("");
-  return wait(3000, signal);
+  return runTypedQueryScenario(actions, signal, "ki");
 }
 
 async function runOrScenario(
   actions: ScenarioActions,
   signal: AbortSignal,
 ): Promise<boolean> {
-  if (!(await wait(1000, signal))) return false;
-  actions.changeQuery("s");
-  if (!(await wait(700, signal))) return false;
-  actions.changeQuery("s ");
-  if (!(await wait(1900, signal))) return false;
-  actions.changeQuery("s o");
-  if (!(await wait(1000, signal))) return false;
-  actions.changeQuery("s or");
-  if (!(await wait(1000, signal))) return false;
-  actions.changeQuery("s or ");
-  if (!(await wait(1000, signal))) return false;
-  actions.changeQuery("s or k");
-  if (!(await wait(1000, signal))) return false;
+  return runTypedQueryScenario(actions, signal, "snare or clap");
+}
 
-  actions.setSelectedIndex(0);
-  actions.playSample("");
-  if (!(await wait(2800, signal))) return false;
-  actions.setSelectedIndex(1);
-  actions.playSample("");
-  if (!(await wait(3800, signal))) return false;
+async function runNotScenario(
+  actions: ScenarioActions,
+  signal: AbortSignal,
+): Promise<boolean> {
+  return runTypedQueryScenario(actions, signal, "kick not heavy");
+}
 
-  actions.changeQuery("");
-  return wait(3000, signal);
+async function runExactScenario(
+  actions: ScenarioActions,
+  signal: AbortSignal,
+): Promise<boolean> {
+  return runTypedQueryScenario(actions, signal, "808 kick");
+}
+
+async function runRangeScenario(
+  actions: ScenarioActions,
+  signal: AbortSignal,
+): Promise<boolean> {
+  return runTypedQueryScenario(actions, signal, "hihat loop 120-130");
+}
+
+async function runKeyScenario(
+  actions: ScenarioActions,
+  signal: AbortSignal,
+): Promise<boolean> {
+  return runTypedQueryScenario(actions, signal, "piano key:c#m");
+}
+
+async function runAliasScenario(
+  actions: ScenarioActions,
+  signal: AbortSignal,
+): Promise<boolean> {
+  return runTypedQueryScenario(actions, signal, "hihat");
+}
+
+async function runTypedQueryScenario(
+  actions: ScenarioActions,
+  signal: AbortSignal,
+  query: string,
+): Promise<boolean> {
+  actions.changeQuery(" ");
+
+  for (let index = 0; index < query.length; index += 1) {
+    actions.changeQuery(query.slice(0, index + 1));
+
+    if (!(await wait(TYPE_DURATION, signal))) return false;
+  }
+
+  return wait(10000, signal);
 }
 
 function wait(ms: number, signal: AbortSignal): Promise<boolean> {
